@@ -1,3 +1,4 @@
 $('#ajax').html("<%= j (render 'last_sentence') %>");
+$('#sentence_count').html("<%= j (render 'sentence_count') %>");
 $(document).find("form").prepend('<%= escape_javascript(render("shared/error_messages", :formats => [:html])) %>');
 $('form')[0].reset();
