@@ -1,10 +1,12 @@
 class SentencesController < ApplicationController
   before_action :set_sentence, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :js
 
   # GET /sentences
   # GET /sentences.json
   def index
     @sentences = Sentence.all
+    @sentence = Sentence.new
   end
 
   # GET /sentences/1
@@ -30,9 +32,11 @@ class SentencesController < ApplicationController
       if @sentence.save
         format.html { redirect_to @sentence, notice: 'Sentence was successfully created.' }
         format.json { render :show, status: :created, location: @sentence }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @sentence.errors, status: :unprocessable_entity }
+        format.js { }
       end
     end
   end
