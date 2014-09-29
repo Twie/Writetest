@@ -4,6 +4,7 @@ class SentencesController < ApplicationController
 
   # GET /sentences
   # GET /sentences.json
+
   def index
     @sentences = Sentence.all
     @sentence = Sentence.new
@@ -75,4 +76,5 @@ class SentencesController < ApplicationController
     def sentence_params
       params.require(:sentence).permit(:content)
     end
-end
+
+  end
