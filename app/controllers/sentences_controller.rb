@@ -68,8 +68,8 @@ class SentencesController < ApplicationController
   end
 
   def chapters
-    @total_chapters = (Sentence.count / 100)
-    @total_chapters = @total_chapters + 1 if (Sentence.count % 100) != 0
+    @total_chapters = (Sentence.count / Sentence::LINES_PER_CHAPTER)
+    @total_chapters = @total_chapters + 1 if (Sentence.count % Sentence::LINES_PER_CHAPTER) != 0
   end
   
   def chapters_download
@@ -77,7 +77,7 @@ class SentencesController < ApplicationController
     if chapter == "all"
       data = Sentence.all.map(&:content).compact.join("\n")
     else
-      data = Sentence.offset(((chapter.to_i - 1) * 100)).limit(100).map(&:content).compact.join("\n")   
+      data = Sentence.offset(((chapter.to_i - 1) * Sentence::LINES_PER_CHAPTER)).limit(Sentence::LINES_PER_CHAPTER).map(&:content).compact.join("\n")   
     end
     send_data data, :filename => "chapter_#{chapter}.txt"
   end
