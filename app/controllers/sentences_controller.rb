@@ -1,5 +1,6 @@
 class SentencesController < ApplicationController
   before_action :set_sentence, only: [:show, :edit, :update, :destroy]
+  before_filter :http_basic_auth, only: [:chapters, :chapters_download]
   respond_to :html, :js
 
   # GET /sentences
@@ -91,4 +92,9 @@ class SentencesController < ApplicationController
       params.require(:sentence).permit(:content)
     end
 
+    def http_basic_auth
+      authenticate_or_request_with_http_basic do |name, password|
+        (name == 'admin' && password == 'admin')
+      end
+    end
   end
