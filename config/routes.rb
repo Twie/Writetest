@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :sentences
+
+  root to: 'sentences#index'
   get 'admin/chapters' => 'sentences#chapters'
   get 'admin/chapters/download' => 'sentences#chapters_download'
 
