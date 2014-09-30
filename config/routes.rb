@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :sentences
+  get 'admin/chapters' => 'sentences#chapters'
+  get 'admin/chapters/download' => 'sentences#chapters_download'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

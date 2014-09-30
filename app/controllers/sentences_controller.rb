@@ -66,6 +66,20 @@ class SentencesController < ApplicationController
     end
   end
 
+  def chapters
+    @total_chapters = (Sentence.count / 100)
+    @total_chapters = @total_chapters + 1 if (Sentence.count % 100) != 0
+  end
+  
+  def chapters_download
+    chapter = params[:chapter]
+    if chapter == "all"
+      data = Sentence.all.map(&:content).compact.join("\n")
+    else
+      data = Sentence.offset(((chapter.to_i - 1) * 100)).limit(100).map(&:content).compact.join("\n")   
+    end
+    send_data data, :filename => "chapter_#{chapter}.txt"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sentence

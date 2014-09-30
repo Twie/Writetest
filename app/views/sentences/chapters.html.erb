@@ -1,0 +1,14 @@
+<h1>
+  <%= "There are a total of #{@total_chapters} chapters in the system"%>
+</h1>	
+
+  <%- count = 0%>
+  <%- @total_chapters.times do %>
+  <div>
+  <%= link_to "Download Chapter #{count + 1}", "/admin/chapters/download?chapter=#{count + 1}"%>
+  <%- count = count + 1%>
+  </div>
+  <%end%>
+  <br>
+  <br>
+  <%= link_to "Download All Chapters", "/admin/chapters/download?chapter=all"%>	
