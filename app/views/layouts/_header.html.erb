@@ -1,20 +1,20 @@
 <div class="ui secondary pointing menu">
-  <%= link_to "Sentences", root_path, class: "active item"%>
-  <!-- <%= link_to root_path do %>
-    <i class="home icon"></i> Sentences
-  <% end %> -->
+  <%= link_to root_path, class: "active item" do %>
+    <i class="home icon"></i> Home
+  <% end %>
   <% if user_signed_in? %>
   	<span class="item">
+  	<i class="user icon"></i>
   	<%= current_user.username %>
   	</span>
   <% end %>
   <div class="right menu">
   	<% if user_signed_in? %>
   		<%= link_to edit_user_registration_path, class:"ui item" do %>
-       		<span class="glyphicon glyphicon-cog"></span> Account Setting
+       		<i class="settings basic icon"></i> Account Setting
         <% end %>
         <%= link_to destroy_user_session_path, class:"ui item", method: :delete do %>
-              <span class="glyphicon glyphicon-log-out"></span> Log out
+              <i class="sign out icon"></i> Log out
             <% end %>
     <% else %>
           <%= link_to new_user_session_path, class:"ui item" do %>
