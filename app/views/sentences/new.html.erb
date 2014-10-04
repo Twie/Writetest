@@ -3,7 +3,7 @@
 		Last Sentence
 	</div>
 	<h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4>
-	<% unless @chance_user.id == @current_user.id%>
+	<% if @chance_user.id == @current_user.id%>
 	<div class="ui ribbon label green">
 		Its your turn!
 	</div>
