@@ -1,25 +1,26 @@
 <%- colors= ['black', 'orange']%>
-    <% if user_signed_in? %>	
-    	
-    	<%- @current_user.groups.each do |group| %>
-		<%- users = group.users_order(@current_user) %>
-		<%- group_color = (users.first == @current_user) ? 'green' : 'red' %>
-		<%= link_to "sentences/new?gid=#{group.id}", class:"ui item", style: "text-decoration: none;" do %>
-		  
-		  <div class="ui blue segment">
-		  <div class="ui ribbon label teal"><%= group.title %></div>	
-			<span class = "ui circular <%= group_color %> label"> </span>
-			<%- users.each_with_index do |user, index| %>
-				<%- if user != current_user%>
-				   <span class = "ui <%= colors[index % colors.count] %> label"><%= user.username %></span>
-				<% else %>
-					<span class = "ui blue label">YOU</span>
-				<% end %>
-			<% end %>
-		  </div>
+<% if user_signed_in? %>
+<div style = "margin:5%">
+	<%- @current_user.groups.each do |group| %>
+	<%- users = group.users_order(@current_user) %>
+	<%- group_color = (users.first == @current_user) ? 'green' : 'red' %>
+	<%= link_to "sentences/new?gid=#{group.id}", class:"ui item", style: "text-decoration: none;" do %>
+
+	<div class="ui blue segment", style = "margin-top: 1%">
+		<div class="ui ribbon label teal">
+			<%= group.title %>
+		</div>
+		<span class = "ui circular <%= group_color %> label"> </span>
+		<%- users.each_with_index do |user, index| %>
+		<%- if user != current_user%>
+		<span class = "ui <%= colors[index % colors.count] %> label"><%= user.username %></span>
+		<% else %>
+		<span class = "ui blue label">YOU</span>
 		<% end %>
+		<% end %>
+	</div>
 	<% end %>
-	<% end%>
+	<% end %>
+</div>
+<% end%>
 
-
-	
