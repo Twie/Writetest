@@ -1,6 +1,7 @@
 class SentencesController < ApplicationController
   before_action :set_sentence, only: [:show, :edit, :update, :destroy]
   before_filter :http_basic_auth, only: [:chapters, :chapters_download]
+  before_filter :confirm_logged_in
   respond_to :html, :js
 
   # GET /sentences

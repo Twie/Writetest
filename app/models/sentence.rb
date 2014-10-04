@@ -8,6 +8,8 @@ class Sentence < ActiveRecord::Base
     too_short: "must have at least %{count} characters",
     too_long: "must have at most %{count} characters"
   }
+  belongs_to :user
+  belongs_to :sentence
 
   def self.save
   	@chapter = self.all

@@ -1,0 +1,21 @@
+    <% if user_signed_in? %>	
+    	
+    	<%- @current_user.groups.each do |group| %>
+		<%- users = group.users_order %>
+		<%= link_to new_sentence_path, class:"ui item" do %>
+		  <div class="ui blue segment">
+			<span style="color:red;font-size:8"><%= group.title %> : </span>
+			<%- users.each do |user| %>
+				<%- if user != current_user%>
+				  <span style="color:blue;font-size:8"><%= user.username %></span>,
+				<% else %>
+					<span style="color:green;font-size:8">YOU</span>,
+				<% end %>
+			<% end %>
+		  </div>
+		<% end %>	
+	<% end %>
+	<% end%>
+
+
+	

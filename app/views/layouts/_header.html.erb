@@ -1,0 +1,26 @@
+<div class="ui secondary pointing menu">
+  <%= link_to "Sentences", root_path, class: "active item"%>
+  <!-- <%= link_to root_path do %>
+    <i class="home icon"></i> Sentences
+  <% end %> -->
+  <% if user_signed_in? %>
+  	<span class="item">
+  	<%= current_user.username %>
+  	</span>
+  <% end %>
+  <div class="right menu">
+  	<% if user_signed_in? %>
+  		<%= link_to edit_user_registration_path, class:"ui item" do %>
+       		<span class="glyphicon glyphicon-cog"></span> Account Setting
+        <% end %>
+        <%= link_to destroy_user_session_path, class:"ui item", method: :delete do %>
+              <span class="glyphicon glyphicon-log-out"></span> Log out
+            <% end %>
+    <% else %>
+          <%= link_to new_user_session_path, class:"ui item" do %>
+              <span class="glyphicon glyphicon-user"></span> Sign in
+            <% end %>
+     <% end %>
+    </a>
+  </div>
+</div>
