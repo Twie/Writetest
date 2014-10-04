@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'semantic-ui-sass', '~> 0.16.1.0'
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 group :development do
 	gem 'sqlite3'

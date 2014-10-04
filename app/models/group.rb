@@ -2,6 +2,8 @@ class Group < ActiveRecord::Base
   has_many :users, through: :user_groups
   has_many :user_groups, :dependent => :destroy
   has_many :sentences
+  accepts_nested_attributes_for :users
+  
   def next_chance
     members_count = self.users.count
     sentencesSoFar = self.sentences.count
