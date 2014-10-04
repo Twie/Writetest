@@ -1,8 +1,10 @@
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
+	<%- if @last_sentence.try(:content).present?%>
 	<div class="ui ribbon label blue">
 		Last Sentence
 	</div>
 	<h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4>
+	<% end %>
 	<% if @chance_user.id == @current_user.id%>
 	<div class="ui ribbon label green">
 		Its your turn!
