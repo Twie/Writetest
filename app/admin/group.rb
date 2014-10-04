@@ -14,6 +14,29 @@ ActiveAdmin.register Group do
   #   permitted
   # end
   
+  index do 
+    column :title
+    column :user
+    actions
+  end
+  
+ show do |group|
+      attributes_table do
+        row :title
+        row :created_at
+        row :updated_at
+      end
+    panel "Users" do
+      table_for group.users do
+        column :username
+        column :firstname
+        column :lastname
+        column :email
+      end
+    end
+    active_admin_comments
+  end
+  
   permit_params :title, user_ids: []
   
   form do |f|
@@ -21,11 +44,6 @@ ActiveAdmin.register Group do
       f.input :title, :as => :text
       f.input :users, as: :check_boxes, collection: User.all
     end
-    # f.inputs do
-        # f.has_many :users, :allow_destroy => true, :heading => 'users', :new_record => false do |cf|
-          # cf.input :title
-        # end
-      # end
     
     f.actions
   end
