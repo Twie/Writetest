@@ -1,15 +1,26 @@
-<div class='test'>
-	<h1>
-		<center><div id="ajax"><%= @last_sentence.try(:content) %>
-		</div></center></h1>
-<% if @chance_user.id == @current_user.id%>
-	<center><%= render 'form' %></center>
-<% else %>
-	<h2><center>Next up: <%= @chance_user.username %></center></h2>
-<% end%>
-
-<h2><center><div id="sentence_count">
-	<%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Sentences submitted
-</div></center></h2>
-
-<%= link_to 'Back', root_path %>
+<div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
+	<div class="ui ribbon label blue">
+		Last Sentence
+	</div>
+	<h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4>
+	<% unless @chance_user.id == @current_user.id%>
+	<div class="ui ribbon label green">
+		Its your turn!
+	</div>
+	<center style="margin: 2%">
+		<%= render 'form' %>
+	</center>
+	<% else %>
+	<div class="ui teal ribbon label">
+		Next Up
+	</div>
+	<h4 class="ui black block header"> <%= @chance_user.username %> </h4>
+	<% end%>
+	<div class="ui red ribbon label">
+		Stats
+	</div>
+	<p>
+		<h4 class="ui black block header"> <%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Sentences submitted </h4>
+	</p>
+</div>
+<%= link_to 'Back', root_path, :class => "ui black button", :style => "margin-left: 20%;" %>
