@@ -1,8 +1,8 @@
     <% if user_signed_in? %>	
     	
     	<%- @current_user.groups.each do |group| %>
-		<%- users = group.users_order %>
-		<%= link_to new_sentence_path, class:"ui item" do %>
+		<%- users = group.users_order(@current_user) %>
+		<%= link_to "sentences/new?gid=#{group.id}", class:"ui item" do %>
 		  <div class="ui blue segment">
 			<span style="color:red;font-size:8"><%= group.title %> : </span>
 			<%- users.each do |user| %>
@@ -13,7 +13,7 @@
 				<% end %>
 			<% end %>
 		  </div>
-		<% end %>	
+		<% end %>
 	<% end %>
 	<% end%>
 

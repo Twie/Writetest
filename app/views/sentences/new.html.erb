@@ -1,5 +1,15 @@
-<h1>New sentence</h1>
+<div class='test'>
+	<h1>
+		<center><div id="ajax"><%= @last_sentence.try(:content) %>
+		</div></center></h1>
+<% if @chance_user.id == @current_user.id%>
+	<center><%= render 'form' %></center>
+<% else %>
+	<h2><center>Next up: <%= @chance_user.username %></center></h2>
+<% end%>
 
-<%= render 'form' %>
+<h2><center><div id="sentence_count">
+	<%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Sentences submitted
+</div></center></h2>
 
 <%= link_to 'Back', sentences_path %>

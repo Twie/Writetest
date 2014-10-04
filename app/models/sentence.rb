@@ -9,7 +9,7 @@ class Sentence < ActiveRecord::Base
     too_long: "must have at most %{count} characters"
   }
   belongs_to :user
-  belongs_to :sentence
+  belongs_to :group
 
   def self.save
   	@chapter = self.all

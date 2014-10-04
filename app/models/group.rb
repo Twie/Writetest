@@ -13,7 +13,7 @@ class Group < ActiveRecord::Base
     end
   end
 
-  def users_order
+  def users_order(current_user = nil)
     created_at_hash = {}
     self.users.each{|user|
       sentence = user.sentences.where(:group_id => self.id).last
@@ -23,6 +23,8 @@ class Group < ActiveRecord::Base
         created_at_hash.merge!({user => 10.years.ago})
       end
     }
-    created_at_hash.sort_by{|k,v| v}.map{|a| a[0]}
+    created_at_hash = created_at_hash.sort_by{|k,v| v}.map{|a| a[0]}
+    created_at_hash = [current_user] + created_at_hash if current_user and current_user.sentences.where(:group_id => self.id).blank?
+    created_at_hash.uniq
   end
 end
