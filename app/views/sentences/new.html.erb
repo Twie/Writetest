@@ -51,7 +51,7 @@
 		Top used words
 	</div>
 	<p>
-		<%- if @sentences_count >= 2%>
+		<%- if @sentences_count >= 10%>
 		<div class="ui medium labels">
 			<%- @group.top_five_words.each do |word|%>
 			<div class="ui label">
