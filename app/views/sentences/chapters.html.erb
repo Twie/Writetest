@@ -1,14 +1,11 @@
 <h1>
-  <%= "There are a total of #{@total_chapters} chapters in the system"%>
+  <%= "There are a total of #{Group.count} groups in the system"%>
 </h1>	
 
   <%- count = 0%>
-  <%- @total_chapters.times do %>
+  <%- Group.all.each do |group| do %>
   <div>
-  <%= link_to "Download Chapter #{count + 1}", "/admin/chapters/download?chapter=#{count + 1}"%>
+  <%= link_to "Download Group #{group.name}", "/admin/chapters/download?group_id=#{group.id}"%>
   <%- count = count + 1%>
   </div>
   <%end%>
-  <br>
-  <br>
-  <%= link_to "Download All Chapters", "/admin/chapters/download?chapter=all"%>	

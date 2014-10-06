@@ -1,3 +1,10 @@
+   <%- @group = Group.find(@group_id) %>
+   <%- @last_sentence = @group.sentences.last %>
+   <%- @current_user = current_user %>
+   <%- @chance_user = @group.users_order[0] %>
+   <%- @sentences_count = @group.sentences.count %>
+
+
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
 	<%- if @last_sentence.try(:content).present?%>
 	<div class="ui ribbon label blue">
@@ -5,24 +12,51 @@
 	</div>
 	<h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4>
 	<% end %>
-	<% if @chance_user.id == @current_user.id%>
-	<div class="ui ribbon label green">
-		Its your turn!
-	</div>
-	<center style="margin: 2%">
-		<%= render 'form' %>
-	</center>
+	<% unless @group.deactivate_group?%>
+	    <% if @current_user.groups.map(&:id).include?(@group.id)%>
+			<% if @chance_user.id == @current_user.id%>
+			<div class="ui ribbon label green">
+				Its your turn!
+			</div>
+			<center style="margin: 2%">
+				<%= render 'form' %>
+			</center>
+			<% else %>
+			<div class="ui teal ribbon label">
+				Next Up
+			</div>
+			<h4 class="ui black block header"> <%= @chance_user.username %> </h4>
+			<% end%>
+		<% else %>
+			<div class="ui ribbon label green">
+				Please Enter Passcode and Join!
+			</div>
+			<center style="margin: 2%">
+				<%= render 'user_group_form' %>
+			</center>
+		<% end  %>
+		
 	<% else %>
-	<div class="ui teal ribbon label">
-		Next Up
-	</div>
-	<h4 class="ui black block header"> <%= @chance_user.username %> </h4>
-	<% end%>
+		<div class="ui ribbon label green">
+			Submissions to this group are over :(
+		</div>
+		<h4 class="ui black block header"> <%= link_to 'Try some other group', root_path, :class => "ui black button" %> </h4>
+	<%end%>
 	<div class="ui red ribbon label">
 		Stats
 	</div>
 	<p>
 		<h4 class="ui black block header"> <%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Sentences submitted </h4>
+	</p>
+	<div class="ui ribbon blue label">
+		Top used words:
+	</div>
+	<p>
+	<%- if @sentences_count >= 10%>
+	  
+	<%- else%>
+	  <h4 class="ui black block header">Will be unlocked after <%= 10 - @sentences_count%> more sentences!</h4>
+	<% end %>
 	</p>
 </div>
 <%= link_to 'Back', root_path, :class => "ui black button", :style => "margin-left: 20%;" %>

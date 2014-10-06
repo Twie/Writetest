@@ -1,0 +1,22 @@
+<%- @user_group = UserGroup.new unless @user_group.present?%>
+<%= form_for @user_group do |f| %>
+  <% if @user_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_group.errors.count, "error") %> prohibited this sentence from being saved:</h2>
+
+      <ul>
+      <% @user_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= text_field_tag :enter_code %>
+  </div>
+  <%= f.hidden_field :group_id, :value => @group_id || Group.first.id %>
+  <div class="actions">
+    <%= f.submit "Join" %>
+  </div>
+<% end %>

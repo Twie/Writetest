@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :sentences
+  resources :user_groups , :only => [:create]
 
   root to: 'groups#index'
   get 'admin/chapters' => 'sentences#chapters'

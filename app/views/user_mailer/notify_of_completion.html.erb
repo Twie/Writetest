@@ -1,0 +1,23 @@
+<p>
+	<%= "Hi,"%>
+</p>
+
+<p>
+	<%= "The submissions for #{@group.title} group are over. The sentences submitted were:"%>
+	<br>
+	<%- @group.sentences.map(&:content).each do |sentence|%>
+	<%= sentence%>
+	<br>
+	<% end %>
+	<br>
+</p>
+
+<p>
+	<%= link_to "Checkout more details", "http://localhost:3000/sentences/new?gid=#{@group.id}"%>
+</p>
+
+<p>
+	- Regards
+	<br>
+	Sil Demmer
+</p>
