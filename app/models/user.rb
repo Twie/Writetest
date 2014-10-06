@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
     user = signed_in_resource ? signed_in_resource : identity.user
     if user.nil?
       email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      if(auth.provider == 'google_oauth2')
+        email_is_verified = auth.info.email && auth.extra.raw_info.email_verified
+      end
       email = auth.info.email if email_is_verified
       user = User.where(:email => email).first if email
       if user.nil?
