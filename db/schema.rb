@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 20141006135124) do
     t.string   "enter_code"
   end
 
+  create_table "identities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
+
   create_table "sentences", force: true do |t|
     t.string   "content"
     t.datetime "created_at"

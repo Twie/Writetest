@@ -13,6 +13,10 @@ gem 'devise'
 gem 'semantic-ui-sass', '~> 0.16.1.0'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'figaro'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
 group :development do
 	gem 'sqlite3'
 	gem 'spring'
