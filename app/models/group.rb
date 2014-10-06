@@ -23,4 +23,8 @@ class Group < ActiveRecord::Base
   def deactivate_group?
     Sentence::LINES_PER_CHAPTER <= self.sentences.count
   end
+  
+  def top_five_words
+    self.sentences.map(&:content).join(" ").split(" ").map(&:downcase).reject{|a| ["is", "the", "and", "or"].include?(a)}.inject(Hash.new(0)) { |m, n| m[n] += 1; m }.sort_by{|k,v| -v}.first(5).map{|a| a[0]}
+  end
 end
