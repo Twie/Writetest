@@ -1,5 +1,5 @@
 class Sentence < ActiveRecord::Base
-  LINES_PER_CHAPTER = 25
+  LINES_PER_CHAPTER = 100
 	validates :content,
 	presence: true,
 	length: {
@@ -10,10 +10,4 @@ class Sentence < ActiveRecord::Base
   }
   belongs_to :user
   belongs_to :group
-
-  def self.save
-  	@chapter = self.all
-    File.open("chapter.txt", "w") { |file| file.write @chapter.join("\n") }
-  end
-
 end

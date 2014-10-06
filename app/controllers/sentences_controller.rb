@@ -3,7 +3,6 @@ class SentencesController < ApplicationController
   before_filter :http_basic_auth, only: [:chapters, :chapters_download]
   before_filter :confirm_logged_in
   respond_to :html, :js
-
   # GET /sentences
   # GET /sentences.json
   def index
@@ -20,13 +19,6 @@ class SentencesController < ApplicationController
   def new
     @group_id = params[:gid]
     @sentence = Sentence.new
-    group = Group.find(@group_id)
-    @last_sentence = group.sentences.last
-    chances_array = group.users_order(current_user)
-    @current_user = current_user
-    @chance_user = chances_array[0]
-    all_sentences_count = group.sentences.count
-    @sentences_count = all_sentences_count%Sentence::LINES_PER_CHAPTER
   end
 
   # GET /sentences/1/edit
@@ -37,11 +29,12 @@ class SentencesController < ApplicationController
   # POST /sentences.json
   def create
     @sentence = current_user.sentences.new(sentence_params)
-      if @sentence.save
-         redirect_to :root, notice: 'Sentence was successfully created.' 
-      else
-         render :new 
-      end
+    if @sentence.save
+      redirect_to :root, notice: 'Sentence was successfully created.'
+    else
+      @group_id = sentence_params[:group_id]
+      render :new
+    end
   end
 
   # PATCH/PUT /sentences/1
@@ -69,18 +62,12 @@ class SentencesController < ApplicationController
   end
 
   def chapters
-    @total_chapters = (Sentence.count / Sentence::LINES_PER_CHAPTER)
-    @total_chapters = @total_chapters + 1 if (Sentence.count % Sentence::LINES_PER_CHAPTER) != 0
   end
 
   def chapters_download
-    chapter = params[:chapter]
-    if chapter == "all"
-      data = Sentence.all.map(&:content).compact.join("\n")
-    else
-      data = Sentence.offset(((chapter.to_i - 1) * Sentence::LINES_PER_CHAPTER)).limit(Sentence::LINES_PER_CHAPTER).map(&:content).compact.join("\n")
-    end
-    send_data data, :filename => "chapter_#{chapter}.txt"
+    group  = Group.find(params[:group_id])
+    data = group.sentences.all.map(&:content).compact.join("\n")
+    send_data data, :filename => "{group.name}.txt"
   end
   private
 

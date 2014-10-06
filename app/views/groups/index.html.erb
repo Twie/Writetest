@@ -1,7 +1,7 @@
 <%- colors= ['black', 'orange']%>
 <% if user_signed_in? %>
 <div style = "margin:5%">
-	<%- @current_user.groups.each do |group| %>
+	<%- Group.all.each do |group| %>
 	<%- users = group.users_order(@current_user) %>
 	<%- group_color = (users.first == @current_user) ? 'green' : 'red' %>
 	<%= link_to "sentences/new?gid=#{group.id}", class:"ui item", style: "text-decoration: none;" do %>
