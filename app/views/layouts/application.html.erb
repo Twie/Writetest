@@ -8,7 +8,13 @@
 </head>
 <body>
 	<%= render 'layouts/header' %>
-	<p class="notice"><%= notice %></p>
+	<%- unless notice.blank?%>
+	<h4 class="ui inverted teal block header" style= "margin: 0.5%">
+		<center> 
+		<%= notice %>
+		</center> 
+    </h4>
+    <% end %>
 	<p class="alert"><%= alert %></p>
 <%= yield %>
 

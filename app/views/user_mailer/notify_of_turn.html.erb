@@ -1,0 +1,17 @@
+<p>
+	<%= "Hi #{@nextup.firstname}"%>
+</p>
+
+<p>
+	<%= "#{@sentence.user.firstname} just posted #{@sentence.content} on #{@sentence.group.title}. Now its  your turn to keep the ball rolling!"%>
+</p>
+
+<p>
+	<%= link_to "Submit you next sentence", "http://localhost:3000/sentences/new?gid=#{@sentence.group.id}"%>
+</p>
+
+<p>
+	- Regards
+	<br>
+	Sil Demmer
+</p>
