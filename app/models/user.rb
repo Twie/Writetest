@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       email = auth.info.email if email_is_verified
       user = User.where(:email => email).first if email
       if user.nil?
-          user = self.generate_user_from_facebook(auth, email)  
+          user = self.generate_user_from_omniauth(auth, email)  
         user.save!
       end
     end
@@ -31,8 +31,7 @@ class User < ActiveRecord::Base
     user
   end
   
-  def self.generate_user_from_facebook(auth, email)
-    puts auth.info.name
+  def self.generate_user_from_omniauth(auth, email)
       user = User.new(firstname: auth.info.first_name, lastname: auth.info.last_name, username: generate_unique_username(auth.info.name),
         email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
         password: Devise.friendly_token[0,20],
