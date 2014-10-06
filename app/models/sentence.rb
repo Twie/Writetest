@@ -1,5 +1,5 @@
 class Sentence < ActiveRecord::Base
-  LINES_PER_CHAPTER = 100
+  LINES_PER_CHAPTER = 4
 	validates :content,
 	presence: true,
 	length: {
@@ -16,6 +16,7 @@ class Sentence < ActiveRecord::Base
     nextup = self.group.users_order.first
     unless nextup.id != self.user_id
       UserMailer.notify_of_turn(nextup, self).deliver
-    end 
-  end
+    end
+    UserMailer.notify_of_completion(self.group).deliver if self.group.sentences.count == LINES_PER_CHAPTER
+    end
 end

@@ -12,4 +12,9 @@ class UserMailer < ActionMailer::Base
     @sentence = sentence
     mail(to: nextup.email, subject: "Now its your turn to keep the ball rolling!")
   end
+  
+  def notify_of_completion(group)
+    @group = group
+    mail(to: [], bcc: group.users.map(&:email), subject: "The submission for the #{group.title} are over!")
+  end
 end
