@@ -48,5 +48,15 @@
 	<p>
 		<h4 class="ui black block header"> <%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Sentences submitted </h4>
 	</p>
+	<div class="ui ribbon blue label">
+		Top used words:
+	</div>
+	<p>
+	<%- if @sentences_count >= 10%>
+	  
+	<%- else%>
+	  <h4 class="ui black block header">Will be unlocked after <%= 10 - @sentences_count%> more sentences!</h4>
+	<% end %>
+	</p>
 </div>
 <%= link_to 'Back', root_path, :class => "ui black button", :style => "margin-left: 20%;" %>
