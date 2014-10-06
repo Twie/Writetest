@@ -1,1 +1,1 @@
-Figaro.require_keys("email_username", "email_secret")
+Figaro.require_keys("email_username", "email_secret", "facebook_app_id", "facebook_app_secret")
