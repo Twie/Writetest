@@ -67,7 +67,7 @@ class SentencesController < ApplicationController
   def chapters_download
     group  = Group.find(params[:group_id])
     data = group.sentences.all.map(&:content).compact.join("\n")
-    send_data data, :filename => "{group.title}.txt"
+    send_data data, :filename => "#{group.title}.txt"
   end
   private
 
