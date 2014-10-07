@@ -13,7 +13,7 @@ class Sentence < ActiveRecord::Base
   after_create :send_email_to_nextup_user
   def send_email_to_nextup_user
     nextup = self.group.users_order.first
-    unless nextup.id != self.user_id
+    unless nextup.id == self.user_id
       UserMailer.notify_of_turn(nextup, self).deliver
     end
     UserMailer.notify_of_completion(self.group).deliver if self.group.sentences.count == LINES_PER_CHAPTER

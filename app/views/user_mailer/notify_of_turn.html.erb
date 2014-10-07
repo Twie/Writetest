@@ -7,7 +7,7 @@
 </p>
 
 <p>
-	<%= link_to "Submit you next sentence", "http://localhost:3000/sentences/new?gid=#{@sentence.group.id}"%>
+	<%= link_to "Submit you next sentence", "#{ENV[:host]}/sentences/new?gid=#{@sentence.group.id}"%>
 </p>
 
 <p>

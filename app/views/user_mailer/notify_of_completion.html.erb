@@ -13,7 +13,7 @@
 </p>
 
 <p>
-	<%= link_to "Checkout more details", "http://localhost:3000/sentences/new?gid=#{@group.id}"%>
+	<%= link_to "Checkout more details", "#{ENV[:host]}/sentences/new?gid=#{@group.id}"%>
 </p>
 
 <p>
