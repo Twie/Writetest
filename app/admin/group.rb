@@ -39,7 +39,7 @@ ActiveAdmin.register Group do
     active_admin_comments
   end
   
-  permit_params :title, user_ids: []
+  permit_params :title, :enter_code, user_ids: []
   
   form do |f|
     f.inputs 'Details' do
