@@ -3,9 +3,9 @@
 </h1>	
 
   <%- count = 0%>
-  <%- Group.all.each do |group| do %>
+  <%- Group.all.each do |group| %>
   <div>
-  <%= link_to "Download Group #{group.name}", "/admin/chapters/download?group_id=#{group.id}"%>
+  <%= link_to "Download Group #{group.title}", "/admin/chapters/download?group_id=#{group.id}"%>
   <%- count = count + 1%>
   </div>
   <%end%>
