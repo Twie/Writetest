@@ -44,9 +44,11 @@ class User < ActiveRecord::Base
   private # all methods that follow will be made private: not accessible for outside objects
   def self.generate_unique_username(name)
     username = name.gsub(/\s+/, "")
-    timestamp = DateTime.now.strftime('%Q').to_s
-    timestamp_len = timestamp.length
-    username = username + timestamp[timestamp_len-4..timestamp_len]
+    if User.find_by_username(username).present? 
+      timestamp = DateTime.now.strftime('%Q').to_s
+      timestamp_len = timestamp.length
+      username = username + timestamp[timestamp_len-4..timestamp_len]
+    end
     username
   end
 end
