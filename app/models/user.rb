@@ -2,7 +2,6 @@ require 'date'
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  TEMP_EMAIL_PREFIX = 'change@me'
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable, :omniauthable
   validates_uniqueness_of :username
@@ -36,19 +35,23 @@ class User < ActiveRecord::Base
   
   def self.generate_user_from_omniauth(auth, email)
       user = User.new(firstname: auth.info.first_name, lastname: auth.info.last_name, username: generate_unique_username(auth.info.name),
-        email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-        password: Devise.friendly_token[0,20],
+        email: email,password: Devise.friendly_token[0,20],
       )
   end
   
   private # all methods that follow will be made private: not accessible for outside objects
   def self.generate_unique_username(name)
     username = name.gsub(/\s+/, "")
-    if User.find_by_username(username).present? 
-      timestamp = DateTime.now.strftime('%Q').to_s
-      timestamp_len = timestamp.length
-      username = username + timestamp[timestamp_len-4..timestamp_len]
+    user = User.where(:username => username).first
+    if(user.nil?)
+      return username
     end
-    username
+    temp_username = username
+    (1..99).to_a.each do |i|
+      temp_username = username + i.to_s
+      user = User.where(:username => temp_username).first
+      break if user.nil?
+    end
+    return temp_username  
   end
 end
