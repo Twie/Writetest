@@ -1,3 +1,4 @@
+<%- host = ENV["host"]%>
 <p>
 	<%= "Hi,"%>
 </p>
@@ -13,7 +14,7 @@
 </p>
 
 <p>
-	<%= link_to "Checkout more details", "#{ENV[:host]}/sentences/new?gid=#{@group.id}"%>
+	<%= link_to "Checkout more details", "#{host}/sentences/new?gid=#{@group.id}"%>
 </p>
 
 <p>
