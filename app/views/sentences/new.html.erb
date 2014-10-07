@@ -7,7 +7,7 @@
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
 	<%- if @last_sentence.try(:content).present?%>
 	<div class="ui ribbon label blue">
-		Last Sentence
+		Last Submission
 	</div>
 	<h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4>
 	<% end %>
@@ -45,7 +45,7 @@
 		Stats
 	</div>
 	<p>
-		<h4 class="ui black block header"> <%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Sentences submitted </h4>
+		<h4 class="ui black block header"> <%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Submissions </h4>
 	</p>
 	<div class="ui ribbon blue label">
 		Top used words
@@ -60,7 +60,7 @@
 			<% end%>
 		</div>
 		<%- else%>
-		<h4 class="ui black block header">Will be unlocked after <%= 10 - @sentences_count%> more sentences!</h4>
+		<h4 class="ui black block header">Will be unlocked after <%= 10 - @sentences_count%> more submissions!</h4>
 		<% end %>
 	</p>
 </div>

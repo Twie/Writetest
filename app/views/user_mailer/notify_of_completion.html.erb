@@ -1,10 +1,10 @@
 <%- host = ENV["host"]%>
 <p>
-	<%= "Hi,"%>
+	<%= "Hey,"%>
 </p>
 
 <p>
-	<%= "The submissions for #{@group.title} group are over. The sentences submitted were:"%>
+	<%= "The submissions for your group: #{@group.title} are complete. Here's the final story:"%>
 	<br>
 	<%- @group.sentences.map(&:content).each do |sentence|%>
 	<%= sentence%>
@@ -18,7 +18,7 @@
 </p>
 
 <p>
-	- Regards
+	- Cheers,
 	<br>
-	Sil Demmer
+	YesAndApp
 </p>

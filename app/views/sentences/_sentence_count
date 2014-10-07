@@ -1,1 +1,1 @@
-<%= Sentence.count %>/100 sentences submitted
+<%= Sentence.count %>/100 submissions

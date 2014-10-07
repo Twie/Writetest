@@ -1,18 +1,16 @@
 <%- host = ENV["host"]%>
 <p>
-	<%= "Hi #{@nextup.firstname},"%>
+	<%= "Hey #{@nextup.firstname},"%>
 </p>
 
 <p>
-	<%= "#{@sentence.user.firstname} just posted #{@sentence.content} on #{@sentence.group.title}. Now its  your turn to keep the ball rolling!"%>
-</p>
-
-<p>
-	<%= link_to "Submit you next sentence", "#{host}/sentences/new?gid=#{@sentence.group.id}"%>
-</p>
-
-<p>
-	- Regards
+	<%= "#{@sentence.user.firstname} just submitted something in #{@sentence.group.title}. Now its your turn to keep the ball rolling!"%>
 	<br>
-	Sil Demmer
+	<%= link_to "Make your next submisson", "#{host}/sentences/new?gid=#{@sentence.group.id}"%>
+</p>
+
+<p>
+	- Cheers,
+	<br>
+	YesAndApp
 </p>
