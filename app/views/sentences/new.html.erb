@@ -39,17 +39,18 @@
 	<div class="ui ribbon label green">
 		Submissions to this group are over :(
 	</div>
-	<h4 class="ui black block header"> <%= link_to 'Try some other group', root_path, :class => "ui black button" %> </h4>
+	<h4 class="ui black block header"> <%= link_to 'Try another group', root_path, :class => "ui black" %> </h4>
 	<%end%>
 	<div class="ui red ribbon label">
 		Stats
 	</div>
 	<p>
-		<h4 class="ui black block header"> <%= @sentences_count %>/<%= Sentence::LINES_PER_CHAPTER %> Submissions </h4>
+		<h4 class="ui black block header"> <%= @sentences_count %>/<%= @group.submissions_limit %> Submissions </h4>
 	</p>
 	<div class="ui ribbon blue label">
 		Top used words
 	</div>
+	<%- if @group.submissions_limit > 10 %>
 	<p>
 		<%- if @sentences_count >= 10%>
 		<div class="ui medium labels">
@@ -62,7 +63,9 @@
 		<%- else%>
 		<h4 class="ui black block header">Will be unlocked after <%= 10 - @sentences_count%> more submissions!</h4>
 		<% end %>
+		
 	</p>
+	<% end %>
 	<input type="hidden" id="chars_limit" value=<%= Sentence::CHARS_PER_SENTENCE %>>
 </div>
 <%= link_to 'Back', root_path, :class => "ui black button", :style => "margin-left: 20%;" %>

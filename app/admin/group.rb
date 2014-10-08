@@ -18,6 +18,7 @@ ActiveAdmin.register Group do
     column :title
     column :enter_code
     column :user
+    column :submissions_limit
     actions
   end
   
@@ -27,6 +28,7 @@ ActiveAdmin.register Group do
         row :enter_code
         row :created_at
         row :updated_at
+        row :submissions_limit
       end
     panel "Users" do
       table_for group.users do
@@ -39,12 +41,13 @@ ActiveAdmin.register Group do
     active_admin_comments
   end
   
-  permit_params :title, :enter_code, user_ids: []
+  permit_params :title, :enter_code, :submissions_limit, user_ids: []
   
   form do |f|
     f.inputs 'Details' do
       f.input :title, :as => :text
       f.input :enter_code, :as => :text
+      f.input :submissions_limit, :as => :text
       f.input :users, as: :check_boxes, collection: User.all
     end
     

@@ -21,7 +21,7 @@ class Group < ActiveRecord::Base
   end
   
   def deactivate_group?
-    Sentence::LINES_PER_CHAPTER <= self.sentences.count
+    self.submissions_limit <= self.sentences.count
   end
   
   def top_five_words
