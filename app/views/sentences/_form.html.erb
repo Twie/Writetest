@@ -10,12 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+	<%= f.hidden_field :group_id, :value => @group_id %>
   <div class="field">
-    <%= f.text_field :content %>
+    <%= f.text_area :content, :id=>"new_sentence_content", :maxlength=> "#{Sentence::CHARS_PER_SENTENCE}" %>
   </div>
-  <%= f.hidden_field :group_id, :value => @group_id %>
-  <div class="actions">
-    <%= f.submit 'Submit' %>
+  
+  <div align="right" class="actions" style="margin-right: 60px;">
+    <span align="left" id="display_count", style='font-size:14px;color:#8899a6;'></span> <%= f.submit 'Submit', :class=>"ui green tiny button" %>
   </div>
 <% end %>

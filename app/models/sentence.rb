@@ -1,5 +1,6 @@
 class Sentence < ActiveRecord::Base
   LINES_PER_CHAPTER = 100
+  CHARS_PER_SENTENCE = 100
   validates :content,
 	presence: true,
 	length: {

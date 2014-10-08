@@ -63,5 +63,6 @@
 		<h4 class="ui black block header">Will be unlocked after <%= 10 - @sentences_count%> more submissions!</h4>
 		<% end %>
 	</p>
+	<input type="hidden" id="chars_limit" value=<%= Sentence::CHARS_PER_SENTENCE %>>
 </div>
 <%= link_to 'Back', root_path, :class => "ui black button", :style => "margin-left: 20%;" %>
