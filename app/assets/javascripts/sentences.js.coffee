@@ -10,3 +10,5 @@ $ ->
     wordsRemaining = char_limit - words
     $("#display_count").text  wordsRemaining
     return
+    
+  

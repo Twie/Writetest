@@ -4,6 +4,7 @@
 	<%- Group.all.each do |group| %>
 	<%- users = group.users_order(@current_user) %>
 	<%- group_color = (users.first == @current_user) ? 'green' : 'red' %>
+	<% if @current_user.groups.map(&:id).include?(group.id)%>
 	<%= link_to "sentences/new?gid=#{group.id}", class:"ui item", style: "text-decoration: none;" do %>
 
 	<div class="ui blue segment", style = "margin-top: 1%">
@@ -19,6 +20,29 @@
 		<% end %>
 		<% end %>
 	</div>
+	<% end %>
+	<% else %>
+		<div class="ui item">
+			<div class="ui blue segment", style = "margin-top: 1%">
+			<div class="ui ribbon label teal">
+				<%= group.title %>
+			</div>
+			<span class = "ui circular red"><i class="block basic icon large"></i> </span>
+			<%- users.each_with_index do |user, index| %>
+			<%- if user != current_user%>
+			<span class = "ui <%= colors[index % colors.count] %> label"><%= user.username %></span>
+			<% end %>
+			<% end %>
+			<br/><br/>
+			<%- @user_group = UserGroup.new unless @user_group.present?%>
+			<%= form_for @user_group, :html => {:style => "width:400px;"} do |f| %>
+			  <%= f.hidden_field :group_id, :value => group.id %>
+			  <%= hidden_field_tag :src, :value => 'groups' %>
+			  <%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %>
+			  <%= f.submit "Join" %>
+			<% end %>
+		</div>
+		</div>
 	<% end %>
 	<% end %>
 </div>

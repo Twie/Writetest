@@ -14,7 +14,9 @@
 
   <div class="field">
     <%= text_field_tag :enter_code %>
+    <%= hidden_field_tag :src, :value => "sentences" %>
   </div>
+  <%= f.hidden_field :src, :value => "sentences" %>
   <%= f.hidden_field :group_id, :value => @group_id || Group.first.id %>
   <div class="actions">
     <%= f.submit "Join the group" %>
