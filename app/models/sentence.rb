@@ -17,6 +17,6 @@ class Sentence < ActiveRecord::Base
     unless nextup.id == self.user_id
       UserMailer.notify_of_turn(nextup, self).deliver
     end
-    UserMailer.notify_of_completion(self.group).deliver if self.group.sentences.count == LINES_PER_CHAPTER
+    UserMailer.notify_of_completion(self.group).deliver if self.group.sentences.count == self.group.submissions_limit
   end
 end
