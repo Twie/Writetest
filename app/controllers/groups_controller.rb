@@ -31,14 +31,11 @@ class GroupsController < ApplicationController
   def invite_users_to_join(emails,group)
     email_ids = extract_emails_from(emails)
     email_ids.each do |email|
-      puts email
       next if current_user.email == email
       user = User.where(:email=>email)
       if(user.nil?)
-        puts "join group"
         UserMailer.invite_to_join_group(current_user,group, user)
       else
-        puts "join app"
         UserMailer.invite_to_join_app(current_user, group, email)
       end
     end
