@@ -1,0 +1,37 @@
+<%- @group = Group.new unless @group.present?%>
+<div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
+<%= form_for @group, :html=> {:style => "margin: 2% 20% 2% 20%"} do |f|%>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+      <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+	<%= f.label "Title"%>
+  <div class="field">
+    <%= f.text_field :title %>
+  </div>
+  </div>
+  <div class="form-group">
+	<%= f.label "Passcode"%>
+  <div class="field">
+    <%= f.text_field :enter_code %>
+  </div>
+  </div>
+  <div class="form-group">
+  	<label>Emails</label>
+  <div class="field">
+  	<%= text_area_tag  'emails' %>
+  </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
+<% end %>
+</div>

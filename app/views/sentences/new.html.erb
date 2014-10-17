@@ -9,7 +9,11 @@
 	<div class="ui ribbon label blue">
 		Last Submission
 	</div>
-	<h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4>
+	<% if @group.deactivate_group?%>
+		<h4 class="ui black block header"> <%= link_to 'See the final result', '/groups/result?gid=#{@group_id}', :class => "ui black" %> </h4>
+	<% else %>
+		<p><h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4></p>
+	<% end %>
 	<% end %>
 	<% unless @group.deactivate_group?%>
 	<% if @current_user.groups.map(&:id).include?(@group.id)%>
@@ -39,7 +43,7 @@
 	<div class="ui ribbon label green">
 		Submissions to this group are over :(
 	</div>
-	<h4 class="ui black block header"> <%= link_to 'Try another group', root_path, :class => "ui black" %> </h4>
+	<h4 class="ui black block header"> <%= link_to 'Start a new group', new_group_path , :class => "ui black" %> </h4>
 	<%end%>
 	<div class="ui red ribbon label">
 		Stats

@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :sentences
   resources :user_groups , :only => [:create]
+  resources :groups, :only => [:new, :create]
 
   root to: 'groups#index'
   get 'admin/chapters' => 'sentences#chapters'
   get 'admin/chapters/download' => 'sentences#chapters_download'
+  get 'groups/result' => 'groups#result'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

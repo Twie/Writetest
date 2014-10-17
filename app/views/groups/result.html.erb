@@ -1,0 +1,9 @@
+<div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
+	<div class="ui ribbon label blue">
+			<%= @group.title %> Result
+		</div>
+		<h3 class="ui black block header">
+			<%- @group.sentences.map(&:content).each do |sentence|%>
+			<%= sentence%>
+		</h3>
+	</div>

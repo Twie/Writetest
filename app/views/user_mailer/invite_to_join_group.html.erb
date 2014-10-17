@@ -1,0 +1,18 @@
+<%- host = ENV["host"]%>
+<p>
+	<%= "Hey #{@user.firstname},"%>
+</p>
+
+<p>
+	<%= "#{@group_creator.firstname} just created a group #{@group.title}. Please join the group! Your password to join group is #{@group.enter_code}"%>
+	<br>
+	<%= link_to "Write your sentence on group.", "www.yesandapp.com/sentences/new?gid=#{@group.id}"%>
+</p>
+
+<p>
+	- Cheers,
+	<br>
+	YesAndApp
+</p>
+
+<!-- #{host}/sentences/ -->
