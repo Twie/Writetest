@@ -34,9 +34,9 @@ class GroupsController < ApplicationController
       next if current_user.email == email
       user = User.where(:email=>email)
       if(user.nil?)
-        UserMailer.invite_to_join_group(current_user,group, user)
+        UserMailer.invite_to_join_group(current_user,group, user).deliver
       else
-        UserMailer.invite_to_join_app(current_user, group, email)
+        UserMailer.invite_to_join_app(current_user, group, email).deliver
       end
     end
   end

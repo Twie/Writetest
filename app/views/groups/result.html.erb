@@ -4,6 +4,7 @@
 		</div>
 		<h3 class="ui black block header">
 			<%- @group.sentences.map(&:content).each do |sentence|%>
-			<%= sentence%>
+			<%= sentence%><br>
+			<%end%>
 		</h3>
 	</div>
