@@ -1,10 +1,31 @@
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
 	<div class="ui ribbon label blue">
-			<%= @group.title %> Result
-		</div>
-		<h3 class="ui black block header">
-			<%- @group.sentences.map(&:content).each do |sentence|%>
-			<%= sentence%><br>
-			<%end%>
-		</h3>
+		<%= @group.title %> Result
 	</div>
+	<h3 class="ui black block header"> <%- @group.sentences.map(&:content).each do |sentence|%>
+	<%= sentence%>
+	<br>
+	<%end%> </h3>
+	
+	<div class="social">
+		<span class="Facebook"> <div class="fb-share-button" data-layout="button_count"></div></span>
+		<span class="twitter"> <a class="twitter-share-button"
+			href="https://twitter.com/share"> Tweet </a></span>
+		<span class="google">
+			<div class="ui google plus mini button g-plus" data-action="share">
+				<i class="google plus icon"></i>
+			</div></span>
+	</div>
+</div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+</script>
+
