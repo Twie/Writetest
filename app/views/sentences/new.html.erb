@@ -10,7 +10,7 @@
 		Last Submission
 	</div>
 	<% if @group.deactivate_group?%>
-		<h4 class="ui black block header"> <%= link_to 'See the final result', "/groups/result?gid=#{@group.id}", :class => "ui black" %> </h4>
+		<h4 class="ui black block header"> <%= link_to 'See the final result', result_group_path(@group), :class => "ui black" %> </h4>
 	<% else %>
 		<p><h4 class="ui black block header"> <%= @last_sentence.try(:content) %> </h4></p>
 	<% end %>
@@ -22,6 +22,7 @@
 		Its your turn!
 	</div>
 	<center style="margin: 2%">
+		<h4 class="ui black block header"> <%= link_to 'Leave the group', leave_group_path(@group), :class => "ui black", :id => "leave_group"%> </h4>
 		<%= render 'form' %>
 	</center>
 	<% else %>
@@ -71,5 +72,30 @@
 	</p>
 	<% end %>
 	<input type="hidden" id="chars_limit" value=<%= Sentence::CHARS_PER_SENTENCE %>>
+	<div class="ui basic modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Warning!
+  </div>
+  <div class="content">
+    <div class="left">
+      <span class="leaving_error"></span>
+    </div>
+    <div class="right">
+    	<%- unless @group.users_order.length > 1%>
+     		If you leave no will be left in this group! This group will delete itself if no-one is in it.
+     	<% end %>
+   		Do you really want to leave this group?
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui button cancel_button">
+      Cancel
+    </div>
+    <div class="ui button okay_button">
+      Okay
+    </div>
+  </div>
+</div>
 </div>
 <%= link_to 'Back', root_path, :class => "ui black button", :style => "margin-left: 20%;" %>

@@ -1,4 +1,5 @@
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
+
 	<div class="ui ribbon label blue">
 		<%= @group.title %> Result
 	</div>
@@ -6,11 +7,10 @@
 	<%= sentence%>
 	<br>
 	<%end%> </h3>
-	
 	<div class="social">
 		<span class="Facebook"> <div class="fb-share-button" data-layout="button_count"></div></span>
 		<span class="twitter"> <a class="twitter-share-button"
-			href="https://twitter.com/share"> Tweet </a></span>
+			href="https://twitter.com/share?text=<%=twitter_text(@group)%>"> Tweet </a></span>
 		<span class="google">
 			<div class="ui google plus mini button g-plus" data-action="share" data-annotation="bubble">
 				<i class="google plus icon"></i>

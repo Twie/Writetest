@@ -6,12 +6,21 @@ class GroupsController < ApplicationController
   end
   
   def result
-    group_id = params[:gid]
-    @group = Group.find(group_id)
+    @group = Group.find(params[:id])
+    @result = @group.sentences.map(&:content).join('. ')
   end
   
   def new
     @current_user = current_user
+  end
+  
+  def leave
+    UserGroup.destroy(UserGroup.find_by(:user_id=>current_user.id, :group_id=>params[:id]).id)
+    group = Group.find(params[:id])
+    if(group.users.size == 0)
+      Group.destroy(params[:id])
+    end
+    redirect_to :root,  :notice => "Group exited successfully!"
   end
   
   def create
