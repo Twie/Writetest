@@ -50,6 +50,10 @@ class GroupsController < ApplicationController
     end
   end
   
+  def demo_facebook_invite
+    
+  end
+  
   def extract_emails_from( raw_text )
     return [] unless raw_text.present?
     raw_text.scan(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i)
