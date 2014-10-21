@@ -16,8 +16,27 @@ class Group < ActiveRecord::Base
         created_at_hash.merge!({user => 10.years.ago})
       end
     }
+    
     created_at_hash = created_at_hash.sort_by{|k,v| v}.map{|a| a[0]}
-    created_at_hash = [current_user] + created_at_hash if current_user and current_user.sentences.where(:group_id => self.id).blank?
+    
+    if current_user and current_user.sentences.where(:group_id => self.id).blank?
+      created_at_hash = [current_user] + created_at_hash 
+    else
+      user = created_at_hash.last
+      last_sentence_by_user = user.sentences.where(:group_id=>self.id).last
+      if(last_sentence_by_user.created_at > Time.now - 24.hours)
+        firstUser = created_at_hash[0]
+        created_at_hash = created_at_hash.delete(firstUser)
+        create_at_hash = created_at_hash.push(firstUser)
+        userGroup = UserGroup.where(:group_id => self.id, :user_id => firstUser.id)
+        userGroup.skippedCount =  userGroup.skippedCount+1
+        if(userGroup.skippedCount >= 2)
+          UserGroup.destroy(userGroup.id)
+        else
+          userGroup.save
+        end
+      end
+    end
     created_at_hash.uniq
   end
   
