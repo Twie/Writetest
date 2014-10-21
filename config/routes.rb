@@ -9,9 +9,9 @@ Rails.application.routes.draw do
       get :result
       post :leave
     end
-    # collection do
-      # get :demo_facebook_invite
-    # end
+    collection do
+      get :demo_facebook_invite
+    end
   end
 
   root to: 'groups#index'
