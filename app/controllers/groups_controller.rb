@@ -20,7 +20,7 @@ class GroupsController < ApplicationController
     if(group.users.size == 0)
       Group.destroy(params[:id])
     end
-    redirect_to :root,  :notice => "Group exited successfully!"
+    render plain:"true"
   end
   
   def create

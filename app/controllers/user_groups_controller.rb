@@ -4,19 +4,24 @@ class UserGroupsController < ApplicationController
   # GET /sentences
   # GET /sentences.json
   def create
-    @user_group = current_user.user_groups.new(user_group_params)
-    @group_id = user_group_params[:group_id]
-    @group = Group.find(@group_id) 
-    src = params[:src]
-    if @group.enter_code.try(:downcase) == params[:enter_code].try(:downcase)
-      @user_group.save
-      redirect_to "/sentences/new?gid=#{user_group_params[:group_id]}", :notice => "Welcome to the group!"
-    else
-      if(src == "sentences")
-        redirect_to "/sentences/new?gid=#{user_group_params[:group_id]}", :notice => "Incorrect Passcode"
+    group_title = params[:title]
+    @group = Group.find_by_title(group_title)
+    @group_id = @group.id
+    unless @group.nil?
+      @user_group = current_user.user_groups.new(:group_id=>@group_id)
+      src = params[:src]
+      if @group.enter_code.try(:downcase) == params[:enter_code].try(:downcase)
+        @user_group.save
+        redirect_to "/sentences/new?gid=#{@group_id}", :notice => "Welcome to the group!"
       else
-        redirect_to :root, :notice => "Incorrect Passcode" 
-      end  
+        if(src == "sentences")
+          redirect_to "/sentences/new?gid=#{@group_id}", :notice => "Incorrect Passcode"
+        else
+          redirect_to :root, :notice => "Incorrect Passcode" 
+        end  
+      end
+    else
+      redirect_to :root, :notice => "No group exists by " + group_title 
     end
   end
   

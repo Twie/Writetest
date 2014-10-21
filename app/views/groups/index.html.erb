@@ -1,12 +1,24 @@
 <%- colors= ['black', 'orange']%>
 <% if user_signed_in? %>
 <div style = "margin:5%">
-	<%- Group.all.each do |group| %>
+	<div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
+		<div class="ui ribbon label blue">
+			Join a new group!
+		</div><br/>
+		<input type="hidden" id="groups_titles" value="<%=groups_titles%>">
+		<%- @user_group = UserGroup.new unless @user_group.present?%>
+		<%= form_for @user_group, :html => {:style => "width:400px;"} do |f| %>
+			<%= hidden_field_tag :src, :value => 'groups' %>
+			<%= text_field_tag :title, nil, placeholder: 'Title', id:'autocomplete' %>
+			<%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %>
+			<%= f.submit "Join" %>
+		<% end %>
+	</div>
+	<%- @current_user.groups.each do |group| %>
 	<%- users = group.users_order(@current_user) %>
 	<%- group_color = (users.first == @current_user) ? 'green' : 'red' %>
 	<% if @current_user.groups.map(&:id).include?(group.id)%>
 	<%= link_to "sentences/new?gid=#{group.id}", class:"ui item", style: "text-decoration: none;" do %>
-
 	<div class="ui blue segment", style = "margin-top: 1%">
 		<div class="ui ribbon label teal">
 			<%= group.title %>
@@ -34,13 +46,6 @@
 			<% end %>
 			<% end %>
 			<br/><br/>
-			<%- @user_group = UserGroup.new unless @user_group.present?%>
-			<%= form_for @user_group, :html => {:style => "width:400px;"} do |f| %>
-			  <%= f.hidden_field :group_id, :value => group.id %>
-			  <%= hidden_field_tag :src, :value => 'groups' %>
-			  <%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %>
-			  <%= f.submit "Join" %>
-			<% end %>
 		</div>
 		</div>
 	<% end %>

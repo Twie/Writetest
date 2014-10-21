@@ -24,13 +24,26 @@ $(document).on 'ready page:load', ->
   $(".okay_button").on "click", (ev) ->
     ev.preventDefault()
     $.post $("#leave_group").attr("href"), (response) ->
-      if response is true
+      if response == "true"
         $(".basic.modal").modal "hide"
+        window.location.href = '/'
       else
         $("#leaving_error").text "Server error! Please contact admin!"
       return
 
     return
+    
+  $("#autocomplete").on "keyup", (ev) ->
+    joined_groups_titles = $('#groups_titles').val()
+    titles = joined_groups_titles.split(';')
+    title_to_match = $(this).val()
+    matched_titles = []
+    i = 0
+    while i < titles.length
+      matched_titles.push titles[i]  if titles[i].indexOf(title_to_match) >= 0
+      i++
+    $("#autocomplete").autocomplete source:matched_titles
+    
 return
     
   

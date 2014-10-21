@@ -6,4 +6,8 @@ module GroupsHelper
     final_len = 140 - url.length
     truncate(result,:length => final_len)  
   end
+  
+  def groups_titles()
+    group_titles_combo = Group.all.map(&:title).join(';')
+  end
 end
