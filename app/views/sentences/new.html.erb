@@ -1,7 +1,7 @@
 <%- @group = Group.find(@group_id) %>
 <%- @last_sentence = @group.sentences.last %>
 <%- @current_user = current_user %>
-<%- @chance_user = @group.users_order[0] %>
+<%- @chance_user = @group.users_order(@current_user)[0] %>
 <%- @sentences_count = @group.sentences.count %>
 
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
@@ -82,7 +82,7 @@
       <span class="leaving_error"></span>
     </div>
     <div class="right">
-    	<%- unless @group.users_order.length > 1%>
+    	<%- unless @group.users_order(@current_user).length > 1%>
      		If you leave no will be left in this group! This group will delete itself if no-one is in it.
      	<% end %>
    		Do you really want to leave this group?

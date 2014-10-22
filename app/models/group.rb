@@ -16,26 +16,34 @@ class Group < ActiveRecord::Base
         created_at_hash.merge!({user => 10.years.ago})
       end
     }
-    
     created_at_hash = created_at_hash.sort_by{|k,v| v}.map{|a| a[0]}
-    
-    if current_user and current_user.sentences.where(:group_id => self.id).blank?
+    current_user_group = current_user.user_groups.find_by_group_id(self.id)
+    if current_user and current_user.sentences.where(:group_id => self.id).blank? and current_user_group.created_at < Time.now - 24.hours
       created_at_hash = [current_user] + created_at_hash 
     else
-      user = created_at_hash.last
-      last_sentence_by_user = user.sentences.where(:group_id=>self.id).last
-      if(last_sentence_by_user.created_at > Time.now - 24.hours)
-        firstUser = created_at_hash[0]
-        created_at_hash = created_at_hash.delete(firstUser)
-        create_at_hash = created_at_hash.push(firstUser)
-        userGroup = UserGroup.where(:group_id => self.id, :user_id => firstUser.id)
-        userGroup.skippedCount =  userGroup.skippedCount+1
-        if(userGroup.skippedCount >= 2)
-          UserGroup.destroy(userGroup.id)
+      last_user = created_at_hash.last
+      first_user = created_at_hash[0]
+      last_sentence_by_last_user = last_user.sentences.where(:group_id=>self.id).last
+      last_user_group = UserGroup.find_by_group_id_and_user_id(self.id, last_user.id)
+      timestamp_for_comparison = last_sentence_by_last_user.present? ? last_sentence_by_last_user.created_at : 10.years.ago
+      puts timestamp_for_comparison
+      if(last_user_group.skipped_count > 0)
+        timestamp_for_comparison = [last_sentence_by_last_user.created_at, last_user_group.updated_at].max
+      end
+      if(timestamp_for_comparison < Time.now - 24.hours)
+        if(self.users.count > 1)
+          created_at_hash.delete(first_user)
+          created_at_hash.push(first_user)
+        end
+        user_group = UserGroup.find_by_group_id_and_user_id(self.id, first_user.id)
+        user_group.skipped_count =  user_group.skipped_count+1
+        if(user_group.skipped_count >= 2 && self.users.count > 1)
+          UserGroup.destroy(user_group.id)
         else
-          userGroup.save
+          user_group.save
         end
       end
+      
     end
     created_at_hash.uniq
   end
