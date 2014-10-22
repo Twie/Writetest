@@ -7,10 +7,14 @@
 		</div><br/>
 		<input type="hidden" id="groups_titles" value="<%=groups_titles%>">
 		<%- @user_group = UserGroup.new unless @user_group.present?%>
-		<%= form_for @user_group, :html => {:style => "width:400px;"} do |f| %>
+		<%= form_for @user_group do |f| %>
 			<%= hidden_field_tag :src, :value => 'groups' %>
-			<%= text_field_tag :title, nil, placeholder: 'Title', id:'autocomplete' %>
-			<%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %>
+			<div class="two fields">
+				<div class="field">
+				<%= text_field_tag :title, nil, placeholder: 'Title', id:'autocomplete' %></div>
+				<div class="field">
+				<%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %></div>
+			</div>
 			<%= f.submit "Join" %>
 		<% end %>
 	</div>
