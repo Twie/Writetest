@@ -71,8 +71,13 @@
 		
 	</p>
 	<% end %>
+	  <br>
+	  <center>	
+	    <%= render :partial => '/groups/facebook_invite', :locals => {:group => @group}%>
+	  </center>
+	
 	<input type="hidden" id="chars_limit" value=<%= Sentence::CHARS_PER_SENTENCE %>>
-	<div class="ui basic modal">
+	<div class="ui basic modal" style="background-color: gray">
   <i class="close icon"></i>
   <div class="header">
     Warning!
