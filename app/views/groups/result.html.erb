@@ -7,25 +7,45 @@
 	<%= sentence%>
 	<br>
 	<%end%> </h3>
-	<div class="social">
-		<span class="Facebook"> <div class="fb-share-button" data-layout="button_count"></div></span>
-		<span class="twitter"> <a class="twitter-share-button"
-			href="https://twitter.com/share?text=<%=twitter_text(@group)%>"> Tweet </a></span>
-		<span class="google">
-			<div class="ui google plus mini button g-plus" data-action="share" data-annotation="bubble">
+	<div>
+		<span>
+			<div class="ui small facebook button">
+			  	<%= link_to "https://www.facebook.com/dialog/feed?app_id=1459207994334269&display=popup&caption=#{@result}&link=#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}&redirect_uri=#{request.protocol}#{request.host_with_port}", class:"socialbutton" do %>
+				  <i class="facebook icon"></i>
+				  Share
+				<% end %>
+  			</div>
+		</span>
+		<span> 
+			<div class="ui small twitter button">
+			  	<%= link_to "https://twitter.com/intent/tweet?text=#{twitter_text(@group)} ,Chk it out on #{request.protocol}#{request.host_with_port}#{result_group_path(@group)}", class:"socialbutton" do %>
+				  <i class="twitter icon"></i>
+				  Share
+				<% end %>
+  			</div></span>
+		<!-- <span>
+			<div class="ui small google plus button">
 				<i class="google plus icon"></i>
-			</div></span>
+				<a
+				  class="g-interactivepost socialbutton"
+				  data-contenturl="#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}"
+				  data-contentdeeplinkid="#{result_group_path(@group)}"
+				  data-clientid="830393760773-plbl2hqmdtq810rn3invets0722r4lqj.apps.googleusercontent.com"
+				  data-cookiepolicy="single_host_origin"
+				  data-prefilltext="#{@result}"
+				  data-calltoactionlabel="GO"
+				  data-calltoactionurl="#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}"
+				  data-calltoactiondeeplinkid="#{result_group_path(@group)}">
+				  Share
+				</a>
+			</div>
+			</span> -->
 	</div>
 </div>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+<!-- <script >
+  window.___gcfg = {
+    lang: 'zh-CN',
+    parsetags: 'onload'
+  };
 </script>
-
+<script src="https://apis.google.com/js/platform.js" async defer></script> -->
