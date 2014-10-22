@@ -10,7 +10,7 @@
 	<div>
 		<span>
 			<div class="ui small facebook button">
-			  	<%= link_to "https://www.facebook.com/dialog/feed?app_id=1459207994334269&display=popup&caption=#{@result}&link=#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}&redirect_uri=#{request.protocol}#{request.host_with_port}", class:"socialbutton" do %>
+			  	<%= link_to "https://www.facebook.com/dialog/feed?app_id=1459207994334269&display=popup&caption=#{@fb_text(@group)}&link=#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}&redirect_uri=#{request.protocol}#{request.host_with_port}", class:"socialbutton" do %>
 				  <i class="facebook icon"></i>
 				  Share
 				<% end %>
@@ -46,7 +46,7 @@
 </div>
 <script >
   window.___gcfg = {
-    lang: 'zh-CN',
+    lang: 'en-US',
     parsetags: 'onload'
   };
 </script>
