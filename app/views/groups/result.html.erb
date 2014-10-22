@@ -23,29 +23,31 @@
 				  Share
 				<% end %>
   			</div></span>
-		<!-- <span>
+		<span>
 			<div class="ui small google plus button">
-				<i class="google plus icon"></i>
-				<a
-				  class="g-interactivepost socialbutton"
-				  data-contenturl='#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}'
-				  data-contentdeeplinkid="#{result_group_path(@group)}"
-				  data-clientid="244780791404-i1r186kncpu7tesl8aa4ofannre1u8p7.apps.googleusercontent.com"
-				  data-cookiepolicy="single_host_origin"
-				  data-prefilltext="#{@result}"
-				  data-calltoactionlabel="GO"
-				  data-calltoactionurl="#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}"
-				  data-calltoactiondeeplinkid="#{result_group_path(@group)}">
+				
+				<%= link_to "#",
+				  class:"g-interactivepost socialbutton",
+				  :data=> {
+				  	:contenturl=>"#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}",
+				  	:contentdeeplinkid=>"#{result_group_path(@group)}",
+				  	:clientid=>"244780791404-i1r186kncpu7tesl8aa4ofannre1u8p7.apps.googleusercontent.com",
+				  	:cookiepolicy=>"single_host_origin",
+				  	:prefilltext=>"#{@result}",
+				  	:calltoactionlabel=>"GO",
+				  	:calltoactionurl=>"#{request.protocol}#{request.host_with_port}#{result_group_path(@group)}",
+				  	:calltoactiondeeplinkid=>"#{result_group_path(@group)}"} do %>
+				  	<i class="google plus icon"></i>
 				  Share
-				</a>
+				<% end %>
 			</div>
-			</span> -->
+			</span>
 	</div>
 </div>
-<!-- <script >
+<script >
   window.___gcfg = {
     lang: 'zh-CN',
     parsetags: 'onload'
   };
 </script>
-<script src="https://apis.google.com/js/platform.js" async defer></script> -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
