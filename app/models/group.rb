@@ -41,6 +41,9 @@ class Group < ActiveRecord::Base
             created_at_hash.push(first_user)
           end
           user_group = UserGroup.find_by_group_id_and_user_id(self.id, first_user.id)
+          if user_group.skipped_count.nil?
+            user_group.skipped_count = 0
+          end
           user_group.skipped_count =  user_group.skipped_count+1
           if(user_group.skipped_count >= 2 && self.users.count > 1)
             UserGroup.destroy(user_group.id)
