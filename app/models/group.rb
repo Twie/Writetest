@@ -28,6 +28,10 @@ class Group < ActiveRecord::Base
         last_user_group = UserGroup.find_by_group_id_and_user_id(self.id, last_user.id)
         timestamp_for_comparison = last_sentence_by_last_user.present? ? last_sentence_by_last_user.created_at : 10.years.ago
         puts timestamp_for_comparison
+        if last_user_group.skipped_count.nil?
+          last_user_group.skipped_count = 0
+          last_user_group.save
+        end
         if(last_user_group.skipped_count > 0)
           timestamp_for_comparison = [last_sentence_by_last_user.created_at, last_user_group.updated_at].max
         end
