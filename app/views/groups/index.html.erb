@@ -1,24 +1,7 @@
 <%- colors= ['black', 'orange']%>
 <% if user_signed_in? %>
 <div style = "margin:5%">
-	<div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
-		<div class="ui ribbon label blue" style="margin-bottom: 10px;">
-			Join a new group!
-		</div><br/>
-		<input type="hidden" id="groups_titles" value="<%=groups_titles%>">
-		<%- @user_group = UserGroup.new unless @user_group.present?%>
-		<%= form_for @user_group do |f| %>
-			<%= hidden_field_tag :src, :value => 'groups' %>
-			<div class="two fields">
-				<div class="field">
-				<%= text_field_tag :title, nil, placeholder: 'Title', id:'autocomplete' %></div>
-				<div class="field">
-				<%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %></div>
-			</div>
-			<%= f.submit "Join" %>
-		<% end %>
-	</div>
-	<%- @current_user.groups.each do |group| %>
+<%- @current_user.groups.each do |group| %>
 	<%- users = group.users_order(@current_user) %>
 	<%- group_color = (users.first == @current_user) ? 'green' : 'red' %>
 	<% if @current_user.groups.map(&:id).include?(group.id)%>
@@ -53,7 +36,28 @@
 		</div>
 		</div>
 	<% end %>
-	<% end %>
+	<% end %>	
+	<div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
+		<div class="ui ribbon label blue" style="margin-bottom: 10px;">
+			Join a new group!
+		</div><br/>
+		<input type="hidden" id="groups_titles" value="<%=groups_titles%>">
+		<%- @user_group = UserGroup.new unless @user_group.present?%>
+		<%= form_for @user_group do |f| %>
+			<%= hidden_field_tag :src, :value => 'groups' %>
+			<div class="two fields">
+				<div class="field">
+				<%= text_field_tag :title, nil, placeholder: 'Title', id:'autocomplete' %></div>
+				<div class="field">
+				<%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %></div>
+			</div>
+			<%= f.submit "Join" %>
+		<% end %>
+	    <div class="ui horizontal divider">
+	    	Or
+	    </div>.
+	    <h4 class="ui black block header"> <%= link_to 'Start a new group', new_group_path , :class => "ui black" %> </h4>
+	</div>
 </div>
 
 <% end%>
