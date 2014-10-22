@@ -6,8 +6,8 @@ class UserGroupsController < ApplicationController
   def create
     group_title = params[:title]
     @group = Group.find_by_title(group_title)
-    @group_id = @group.id
     unless @group.nil?
+      @group_id = @group.id
       @user_group = current_user.user_groups.new(:group_id=>@group_id)
       src = params[:src]
       if @group.enter_code.try(:downcase) == params[:enter_code].try(:downcase)
