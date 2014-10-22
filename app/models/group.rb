@@ -19,7 +19,7 @@ class Group < ActiveRecord::Base
     created_at_hash = created_at_hash.sort_by{|k,v| v}.map{|a| a[0]}
     unless self.deactivate_group?
       current_user_group = current_user.user_groups.find_by_group_id(self.id)
-      if current_user and current_user.sentences.where(:group_id => self.id).blank? and current_user_group.created_at < Time.now - 24.hours
+      if current_user and current_user.sentences.where(:group_id => self.id).blank? and current_user_group.created_at > Time.now - 24.hours
         created_at_hash = [current_user] + created_at_hash 
       else
         last_user = created_at_hash.last
