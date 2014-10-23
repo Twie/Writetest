@@ -12,6 +12,10 @@ module GroupsHelper
   def groups_titles()
     group_titles_combo = Group.all.map(&:title).join(';')
   end
+ 
+  def encode(text)
+    URI::encode(text)
+  end
   
   def fb_text(group)
     result = group.sentences.map(&:content).join('. ')
