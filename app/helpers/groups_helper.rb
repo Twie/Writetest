@@ -4,7 +4,7 @@ module GroupsHelper
     url = result_group_url(group)
     result = group.sentences.map(&:content).join('. ')
     final_len = 140 - url.length
-    truncate(result,:length => final_len)  
+    URI.encode(truncate(result,:length => final_len))
   end
   
   def groups_titles()
@@ -13,6 +13,6 @@ module GroupsHelper
   
   def fb_text(group)
     result = group.sentences.map(&:content).join('. ')
-    truncate(result,:length => 900)
+    URI.encode(truncate(result,:length => 900))
   end
 end
