@@ -12,7 +12,7 @@
   <% end %>
 	<%= f.hidden_field :group_id, :value => @group_id %>
   <div class="field">
-    <%= f.text_area :content, :id=>"new_sentence_content", :maxlength=> "#{Sentence::CHARS_PER_SENTENCE}" %>
+    <%= f.text_area :content, :id=>"new_sentence_content", :placeholder => "Your Submission", :maxlength=> "#{Sentence::CHARS_PER_SENTENCE}" %>
   </div>
   
   <div align="right" class="actions" style="margin-right: 60px;">
