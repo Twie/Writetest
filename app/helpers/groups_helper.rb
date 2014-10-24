@@ -19,7 +19,6 @@ module GroupsHelper
   
   def fb_text(group)
     result = group.sentences.map(&:content).join('. ')
-    result = truncate(result,:length => 900).to_str
     URI::encode(result)
   end
 end
