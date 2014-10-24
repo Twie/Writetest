@@ -27,15 +27,14 @@ class Group < ActiveRecord::Base
         last_sentence_by_last_user = last_user.sentences.where(:group_id=>self.id).last
         last_user_group = UserGroup.find_by_group_id_and_user_id(self.id, last_user.id)
         timestamp_for_comparison = last_sentence_by_last_user.present? ? last_sentence_by_last_user.created_at : 10.years.ago
-        puts timestamp_for_comparison
         if last_user_group.skipped_count.nil?
           last_user_group.skipped_count = 0
           last_user_group.save
         end
         if(last_user_group.skipped_count > 0)
-          timestamp_for_comparison = [last_sentence_by_last_user.created_at, last_user_group.updated_at].max
+          timestamp_for_comparison = [timestamp_for_comparison, last_user_group.updated_at].max
         end
-        if(timestamp_for_comparison < Time.now - 24.hours)
+        if(timestamp_for_comparison < Time.now - 5.minutes)
           if(self.users.count > 1)
             created_at_hash.delete(first_user)
             created_at_hash.push(first_user)
