@@ -19,35 +19,42 @@ class Group < ActiveRecord::Base
     created_at_hash = created_at_hash.sort_by{|k,v| v}.map{|a| a[0]}
     unless self.deactivate_group?
       current_user_group = current_user.user_groups.find_by_group_id(self.id)
-      if current_user and current_user.sentences.where(:group_id => self.id).blank? and current_user_group.created_at > Time.now - 24.hours
+      if current_user.sentences.where(:group_id => self.id).blank? and current_user_group.created_at > Time.now - 24.hours
         created_at_hash = [current_user] + created_at_hash 
       else
         last_user = created_at_hash.last
         first_user = created_at_hash[0]
         last_sentence_by_last_user = last_user.sentences.where(:group_id=>self.id).last
         last_user_group = UserGroup.find_by_group_id_and_user_id(self.id, last_user.id)
-        timestamp_for_comparison = last_sentence_by_last_user.present? ? last_sentence_by_last_user.created_at : 10.years.ago
         if last_user_group.skipped_count.nil?
           last_user_group.skipped_count = 0
           last_user_group.save
         end
+        do_not_skip = false
         if(last_user_group.skipped_count > 0)
+          timestamp_for_comparison = last_sentence_by_last_user.present? ? last_sentence_by_last_user.created_at : 10.years.ago
           timestamp_for_comparison = [timestamp_for_comparison, last_user_group.updated_at].max
+        elsif(last_user_group.skipped_count == 0 and !last_sentence_by_last_user.present?)
+          do_not_skip = true
+        elsif(last_user_group.skipped_count == 0 and last_sentence_by_last_user.present?)
+          timestamp_for_comparison = last_sentence_by_last_user.created_at
         end
-        if(timestamp_for_comparison < Time.now - 5.minutes)
+        if(do_not_skip == false and timestamp_for_comparison < Time.now - 24.hours)
           if(self.users.count > 1)
             created_at_hash.delete(first_user)
             created_at_hash.push(first_user)
           end
           user_group = UserGroup.find_by_group_id_and_user_id(self.id, first_user.id)
-          if user_group.skipped_count.nil?
-            user_group.skipped_count = 0
-          end
-          user_group.skipped_count =  user_group.skipped_count+1
-          if(user_group.skipped_count >= 2 && self.users.count > 1)
-            UserGroup.destroy(user_group.id)
-          else
-            user_group.save
+          if(user_group.updated_at < Time.now - 24.hours)
+            if user_group.skipped_count.nil?
+              user_group.skipped_count = 0
+            end
+            user_group.skipped_count =  user_group.skipped_count+1
+            if(user_group.skipped_count >= 2 and self.users.count > 1)
+              UserGroup.destroy(user_group.id)
+            else
+              user_group.save
+            end
           end
         end
       end
