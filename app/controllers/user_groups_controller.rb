@@ -13,10 +13,10 @@ class UserGroupsController < ApplicationController
         @user_group.save
         redirect_to "/sentences/new?gid=#{@group_id}", :notice => "Welcome to the group!"
       else
-        redirect_to :root, :notice => "Incorrect Passcode" 
+        redirect_to :root, :alert => "Incorrect Passcode" 
       end
     else
-      redirect_to :root, :notice => "Group does not exists!"
+      redirect_to :root, :alert => "Group does not exists!"
     end
   end
   
@@ -32,13 +32,13 @@ class UserGroupsController < ApplicationController
         redirect_to "/sentences/new?gid=#{@group_id}", :notice => "Welcome to the group!"
       else
         if(src == "sentences")
-          redirect_to "/sentences/new?gid=#{@group_id}", :notice => "Incorrect Passcode"
+          redirect_to "/sentences/new?gid=#{@group_id}", :alert => "Incorrect Passcode"
         else
-          redirect_to :root, :notice => "Incorrect Passcode" 
+          redirect_to :root, :alert => "Incorrect Passcode" 
         end  
       end
     else
-      redirect_to :root, :notice => "No group exists by " + group_title 
+      redirect_to :root, :alert => "No group exists by " + group_title 
     end
   end
   
