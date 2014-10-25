@@ -6,7 +6,7 @@
 <p>
 	<%= "#{@group_creator.firstname} just created a group #{@group.title}. Please join the group!"%>
 	<br>
-	<%= link_to "Write your sentence on group.", "https://www.yesandapp.com/user_groups/new?gid=#{@group.id}&passwd=#{@group.enter_code}"%>
+	<%= link_to "Write your sentence on group.", new_user_group_url+"?gid=#{@group.id}&passwd=#{@group.enter_code}"%>
 </p>
 
 <p>

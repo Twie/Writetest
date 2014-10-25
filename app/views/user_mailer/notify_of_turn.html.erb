@@ -9,7 +9,7 @@
 	<% end %>
 	<%= "Its your turn to keep the ball rolling!" %>
 	<br>
-	<%= link_to "Make your next submisson", "https://www.yesandapp.com/sentences/new?gid=#{@sentence.group.id}"%>
+	<%= link_to "Make your next submisson", new_sentence_url+"?gid=#{@group.id}"%>
 </p>
 
 <p>

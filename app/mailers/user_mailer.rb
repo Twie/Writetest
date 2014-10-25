@@ -7,9 +7,10 @@ class UserMailer < ActionMailer::Base
     end
   end
   
-  def notify_of_turn(nextup, sentence)
+  def notify_of_turn(nextup, sentence, group)
     @nextup = nextup
     @sentence = sentence
+    @group = group
     mail(to: nextup.email, subject: "It's your turn!")
   end
   
