@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :sentences
-  resources :user_groups , :only => [:create]
+  resources :user_groups , :only => [:new, :create]
   resources :groups, :only => [:new, :create] do 
     member do
       get :result

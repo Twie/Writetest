@@ -4,7 +4,10 @@
 </p>
 
 <p>
-	<%= "#{@sentence.user.firstname} just submitted something in #{@sentence.group.title}. Now its your turn to keep the ball rolling!"%>
+	<%- unless @sentence.nil? %>
+		<%= "#{@sentence.user.firstname} just submitted something in #{@sentence.group.title}."%>
+	<% end %>
+	<%= "Its your turn to keep the ball rolling!" %>
 	<br>
 	<%= link_to "Make your next submisson", "https://www.yesandapp.com/sentences/new?gid=#{@sentence.group.id}"%>
 </p>

@@ -4,12 +4,12 @@ class UserGroupsController < ApplicationController
   # GET /sentences
   # GET /sentences.json
   def new
-    group_id = params[:gid]
+    @group_id = params[:gid]
     group_passwd = params[:passwd]
-    @group = Group.find(group_id)
+    @group = Group.find_by_id(@group_id)
     unless @group.nil?
       @user_group = current_user.user_groups.new(:group_id=>@group.id)
-      if @group.enter_code.try(:downcase) == params[:enter_code].try(:downcase)
+      if @group.enter_code.try(:downcase) == group_passwd.try(:downcase)
         @user_group.save
         redirect_to "/sentences/new?gid=#{@group_id}", :notice => "Welcome to the group!"
       else

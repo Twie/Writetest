@@ -30,4 +30,16 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to:user.email, subject: "#{group.title} group join invitation from #{group_creator.firstname}!")
   end
+  
+  def notify_of_skip_chance(user, group)
+    @user= user
+    @group = group
+    mail(to:user.email, subject: "Your chance for #{group.title} has been skipped!")
+  end
+  
+  def notify_of_group_eviction(user, group)
+    @user= user
+    @group = group
+    mail(to:user.email, subject: "You have been kicked out of #{group.title}!")
+  end
 end
