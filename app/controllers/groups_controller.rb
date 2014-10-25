@@ -60,7 +60,7 @@ class GroupsController < ApplicationController
   end
   
   def group_params
-    params.require(:group).permit(:title, :enter_code)
+    params.require(:group).permit(:title, :enter_code, :submissions_limit)
   end
   
 end

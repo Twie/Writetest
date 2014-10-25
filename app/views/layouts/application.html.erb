@@ -30,6 +30,12 @@
 		<%= notice %>
 		</center> 
     </h4>
+    <%- unless errnotice.blank?%>
+	<h4 class="ui inverted red block header" style= "margin: 0.5%">
+		<center> 
+		<%= errnotice %>
+		</center> 
+    </h4>
     <% end %>
 	<p class="alert"><%= alert %></p>
 <%= yield %>

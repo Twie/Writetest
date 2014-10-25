@@ -47,7 +47,7 @@
 			<%= hidden_field_tag :src, :value => 'groups' %>
 			<div class="two fields">
 				<div class="field">
-				<%= text_field_tag :title, nil, placeholder: 'Title', id:'autocomplete' %></div>
+				<%= text_field_tag :title, nil, placeholder: 'Title', id:'autocomplete', :style=>"text-transform: lowercase;" %></div>
 				<div class="field">
 				<%= text_field_tag :enter_code, nil, placeholder: 'Password',  maxlength: 20 %></div>
 			</div>

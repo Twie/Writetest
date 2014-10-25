@@ -15,13 +15,19 @@
   <div class="form-group">
 	<%= f.label "Title"%>
   <div class="field">
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :style=>"text-transform: lowercase;" %>
   </div>
   </div>
   <div class="form-group">
 	<%= f.label "Passcode"%>
   <div class="field">
     <%= f.text_field :enter_code %>
+  </div>
+  </div>
+  <div class="form-group">
+	<%= f.label "Submissions Limit"%>
+  <div class="field">
+    <%= f.text_field :submissions_limit %>
   </div>
   </div>
   <div class="form-group">
