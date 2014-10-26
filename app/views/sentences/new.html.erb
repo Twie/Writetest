@@ -73,7 +73,8 @@
 	<% end %>
 	  <br>
 	  <center>	
-	    <%= render :partial => '/groups/facebook_invite', :locals => {:group => @group}%>
+	    <%= render :partial => '/groups/facebook_invite', :locals => {:group => @group}%><br /><br/>
+	    <%= render :partial => '/groups/invite_friends_by_email', :locals => {:group => @group}%>
 	  </center>
 	
 	<input type="hidden" id="chars_limit" value=<%= Sentence::CHARS_PER_SENTENCE %>>

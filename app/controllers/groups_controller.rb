@@ -55,7 +55,14 @@ class GroupsController < ApplicationController
   end
   
   def demo_facebook_invite
-    
+  end
+  
+  def invite_by_email
+    puts params[:group_id]
+    @group = Group.find(params[:group_id])
+    emails = params[:emails]
+    invite_users_to_join(emails, @group)
+    redirect_to "/sentences/new?gid=#{@group.id}", :notice => "Invitations successfully sent!"
   end
   
   def extract_emails_from( raw_text )

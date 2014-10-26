@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get :result
       post :leave
+      post :invite_by_email
     end
     collection do
       get :demo_facebook_invite
