@@ -4,10 +4,10 @@
 </p>
 
 <p>
-	<%= "#{@group_creator.firstname} at Sentences just created a group #{@group.title} and wants you to join it.Please sign up and join the group! Your password to join group is #{@group.enter_code}"%>
+	<%= "#{@group_creator.firstname} at Sentences just created a group #{@group.title} and wants you to join it.Please sign up and join the group!"%>
 	<br>
 	<%= link_to "Join us", root_url %>
-	<%= link_to "Write your sentence on group.", new_sentence_url+"?gid=#{@group.id}"%>
+	<%= link_to "Write your sentence on group.", new_user_group_url +"?gid=#{@group.id}&token=#{@token}"%>
 </p>
 
 <p>

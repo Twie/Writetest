@@ -22,6 +22,7 @@ class UserMailer < ActionMailer::Base
   def invite_to_join_app(group_creator, group, email_id)
     @group = group
     @group_creator = group_creator
+    @token = generate_invite_token(email_id, group)
     mail(to:email_id, subject: "#{group.title} group join invitation from #{group_creator.firstname}!")
   end
   
@@ -29,6 +30,7 @@ class UserMailer < ActionMailer::Base
     @group = group
     @group_creator = group_creator
     @user = user
+    @token = generate_invite_token(user.email, group)
     mail(to:user.email, subject: "#{group.title} group join invitation from #{group_creator.firstname}!")
   end
   
@@ -41,6 +43,14 @@ class UserMailer < ActionMailer::Base
   def notify_of_group_eviction(user, group)
     @user= user
     @group = group
+    @token = generate_invite_token(user.email, group)
     mail(to:user.email, subject: "You have been kicked out of #{group.title}!")
+  end
+  
+  private
+  def generate_invite_token(email, group)
+    key = ENV['encoding_key']
+    signature = email+group.id.to_s
+    generated_token = CGI.escape(Base64.encode64("#{OpenSSL::HMAC.digest('sha1',key, signature)}\n"))
   end
 end
