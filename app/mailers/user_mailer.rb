@@ -50,6 +50,8 @@ class UserMailer < ActionMailer::Base
   private
   def generate_invite_token(email, group)
     key = ENV['encoding_key']
+    puts key
+    puts email
     signature = email+group.id.to_s
     generated_token = CGI.escape(Base64.encode64("#{OpenSSL::HMAC.digest('sha1',key, signature)}\n"))
   end
