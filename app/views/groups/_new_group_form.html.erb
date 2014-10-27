@@ -13,27 +13,27 @@
     </div>
   <% end %>
   <div class="form-group">
-	<%= f.label "Title"%>
+	<%= f.label "Group Title"%>
   <div class="field">
-    <%= f.text_field :title, :style=>"text-transform: lowercase;" %>
+    <%= f.text_field :title, nil, placeholder: 'New YesAndApp Group', :style=>"text-transform: lowercase;" %>
   </div>
   </div>
   <div class="form-group">
-	<%= f.label "Passcode"%>
+	<%= f.label "Group Password"%>
   <div class="field">
-    <%= f.text_field :enter_code %>
+    <%= f.text_field :enter_code, nil, placeholder: 'Password123' %>
   </div>
   </div>
   <div class="form-group">
-	<%= f.label "Submissions Limit"%>
+	<%= f.label "Submission Limit (Recommended 25-50)"%>
   <div class="field">
-    <%= f.text_field :submissions_limit %>
+    <%= f.text_field :submissions_limit, nil, placeholder: '25' %>
   </div>
   </div>
   <div class="form-group">
-  	<label>Emails</label>
+  	<label>Enter Emails to Invite</label>
   <div class="field">
-  	<%= text_area_tag  'emails' %>
+  	<%= text_area_tag  'Jack@Example.com, Jill@Example.com, FluffyPenguin@Hotmail.com' %>
   </div>
   </div>
   <div class="actions">
