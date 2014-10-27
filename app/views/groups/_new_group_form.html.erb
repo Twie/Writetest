@@ -15,19 +15,19 @@
   <div class="form-group">
 	<%= f.label "Group Title"%>
   <div class="field">
-    <%= f.text_field :title, nil, placeholder: 'New YesAndApp Group', :style=>"text-transform: lowercase;" %>
+    <%= f.text_field :title, :placeholder => 'New YesAndApp Group', :style=>"text-transform: lowercase;" %>
   </div>
   </div>
   <div class="form-group">
 	<%= f.label "Group Password"%>
   <div class="field">
-    <%= f.text_field :enter_code, nil, placeholder: 'Password123' %>
+    <%= f.text_field :enter_code, :placeholder => 'Password123' %>
   </div>
   </div>
   <div class="form-group">
 	<%= f.label "Submission Limit (Recommended 25-50)"%>
   <div class="field">
-    <%= f.text_field :submissions_limit, nil, placeholder: '25' %>
+    <%= f.text_field :submissions_limit %>
   </div>
   </div>
   <div class="form-group">
