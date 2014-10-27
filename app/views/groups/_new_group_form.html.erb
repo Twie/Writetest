@@ -27,13 +27,13 @@
   <div class="form-group">
 	<%= f.label "Submission Limit (Recommended 25-50)"%>
   <div class="field">
-    <%= f.text_field :submissions_limit %>
+    <%= f.text_field :submissions_limit, :placeholder '25' %>
   </div>
   </div>
   <div class="form-group">
-  	<label>Enter Emails to Invite</label>
+  	<label>Emails</label>
   <div class="field">
-  	<%= text_area_tag  'Jack@Example.com, Jill@Example.com, FluffyPenguin@Hotmail.com' %>
+  	<%= text_area_tag 'Emails',nil, placeholder: "Add emails to invite" %>
   </div>
   </div>
   <div class="actions">
