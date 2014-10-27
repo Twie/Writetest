@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20141027161349) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "enter_code"
-    t.integer  "submissions_limit", default: 25
+    t.integer  "submissions_limit", default: 100
   end
 
   create_table "identities", force: true do |t|
