@@ -2,6 +2,7 @@ class Group < ActiveRecord::Base
   has_many :users, through: :user_groups
   has_many :user_groups, :dependent => :destroy
   has_many :sentences
+  has_many :join_group_email_invitations
   validates_presence_of :title
   validates_uniqueness_of :title
   accepts_nested_attributes_for :users

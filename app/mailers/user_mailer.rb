@@ -23,6 +23,8 @@ class UserMailer < ActionMailer::Base
     @group = group
     @group_creator = group_creator
     @token = generate_invite_token(email_id, group)
+    invite_to_join_group = group.join_group_email_invitations.create(:email_id=>email_id)
+    invite_to_join_group.save
     mail(to:email_id, subject: "#{group.title} group join invitation from #{group_creator.firstname}!")
   end
   
