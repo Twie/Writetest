@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     end
     collection do
       get :demo_facebook_invite
-      match :facebook_invite_callback
+      get :facebook_invite_callback
+      post :facebook_invite_callback
     end
   end
 
