@@ -11,6 +11,6 @@ class FacekookGroupJoinRequestsController < ApplicationController
   def facebook_group_join_request_params
     puts "#################"
     puts params
-    params.require(:facebook_group_join_request).permit(:group_title, :request_id)
+    params.require(:facekook_group_join_request).permit(:group_title, :request_id)
   end
 end

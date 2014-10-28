@@ -22,12 +22,10 @@ message: '<%= [current_user.firstname, current_user.lastname].join(" ")%> invite
         $.ajax({
 			url : '/facekook_group_join_requests.json',
 			data : {
-			 facekook_group_join_request:{
-			 	{
+			 facekook_group_join_request: {
 			 		group_title: '<%= group.try(:title)%>',
 			 		resuest_id: response['request_id']
 			 	}
-			 }	
 			},
 			type : "POST",
 			success : function(response2) {
