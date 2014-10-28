@@ -3,8 +3,8 @@ require 'cgi'
 require 'openssl'
 
 class GroupsController < ApplicationController
-  before_filter :confirm_logged_in
-  
+  before_filter :confirm_logged_in, :except => :facebook_invite_callback
+  skip_before_filter :verify_authenticity_token, :only => :facebook_invite_callback
   def facebook_invite_callback
     puts "#################"
     puts params
