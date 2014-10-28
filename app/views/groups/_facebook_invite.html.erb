@@ -18,7 +18,22 @@ FB.ui({
 method: 'apprequests',
 message: '<%= [current_user.firstname, current_user.lastname].join(" ")%> invited you to join the <%= group.try(:title)%> group on YesAndApp'}
 ,function(response){
-        console.log(response);
+	    console.log(response)
+        $.ajax({
+			url : '/facekook_group_join_requests.json',
+			data : {
+			 facekook_group_join_request:{
+			 	{
+			 		group_title: '<%= group.try(:title)%>',
+			 		resuest_id: response['request_id']
+			 	}
+			 }	
+			},
+			type : "POST",
+			success : function(response2) {
+				console.log(response2);
+			}
+		});
 });
 });
 });
