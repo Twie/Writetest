@@ -17,9 +17,6 @@ class User < ActiveRecord::Base
     unless join_group_invitations.nil?
       join_group_invitations.each do |invitation|
         user_group = self.user_groups.new(:group_id => invitation.group.id)
-        if user_group.save
-          JoinGroupEmailInvitation.destroy(invitation.id)
-        end
       end
     end  
   end
