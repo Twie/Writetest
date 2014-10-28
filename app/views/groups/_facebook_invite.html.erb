@@ -16,9 +16,10 @@ $(function(){
 
 FB.ui({
 method: 'apprequests',
-message: '<%= [current_user.firstname, current_user.lastname].join(" ")%> invited you to join the <%= group.try(:title)%> group on YesAndApp'});
-}, function(response){
+message: '<%= [current_user.firstname, current_user.lastname].join(" ")%> invited you to join the <%= group.try(:title)%> group on YesAndApp'}
+,function(response){
         console.log(response);
-    });
+});
+});
 });
 </script>
