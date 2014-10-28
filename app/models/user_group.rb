@@ -7,9 +7,9 @@ class UserGroup < ActiveRecord::Base
   def destroy_join_group_invitations_if_any
     user = User.find(self.user_id)
     group = Group.find(self.group_id)
-    join_group_email_invitation =  group.join_group_email_invitations.where(:email_id => user.email)
-    unless join_group_email_invitation.nil?
-      JoinGroupEmailInvitation.destroy(join_group_email_invitation.first.id)
+    join_group_email_invitations =  group.join_group_email_invitations.where(:email_id => user.email)
+    join_group_email_invitations.each do |invitation|
+      JoinGroupEmailInvitation.destroy(invitation.id)
     end
   end
   
