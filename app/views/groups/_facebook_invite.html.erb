@@ -10,12 +10,15 @@ $(function(){
         appId: '<%= ENV["facebook_app_id"]%>',
         status: true,
         cookie: false,
+        
         // xfbml: true
         });
 
 FB.ui({
 method: 'apprequests',
 message: '<%= [current_user.firstname, current_user.lastname].join(" ")%> has requested you to join <%= group.try(:title)%> group on Yesandapp'});
-});
+}, function(response){
+        console.log(response);
+    });
 });
 </script>
