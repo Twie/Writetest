@@ -73,7 +73,8 @@
 	<% end %>
 	  <br>
 	  <center>	
-	    <%= render :partial => '/groups/facebook_invite', :locals => {:group => @group}%>
+	    <%= render :partial => '/groups/facebook_invite', :locals => {:group => @group}%><br /><br/>
+	    <%= render :partial => '/groups/invite_friends_by_email', :locals => {:group => @group}%>
 	  </center>
 	
 	<input type="hidden" id="chars_limit" value=<%= Sentence::CHARS_PER_SENTENCE %>>
@@ -103,4 +104,8 @@
   </div>
 </div>
 </div>
+<center style="font-style:bold">
+	<b>Group name: <%= @group.title %></b><br/>
+	<b>Password: <%= @group.enter_code %></b>
+</center>
 <%= link_to 'Back', root_path, :class => "ui black button", :style => "margin-left: 20%;" %>

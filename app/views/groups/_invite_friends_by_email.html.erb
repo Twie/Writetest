@@ -1,0 +1,5 @@
+<%= form_for :group, :url=>invite_by_email_group_path(group),:html=> {:style => "margin: 0px 150px;"} do |f| %>
+	<%= hidden_field_tag :group_id, "#{group.id}" %>
+	<%= text_area_tag 'emails',nil, placeholder: "Add emails to invite" %>
+    <%= f.submit "Invite", style: "float:right;" %>
+<% end %>

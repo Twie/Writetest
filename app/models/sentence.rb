@@ -15,7 +15,7 @@ class Sentence < ActiveRecord::Base
     nextup = self.group.users_order(self.user).first
     
     if nextup and nextup.id != self.user_id
-      UserMailer.notify_of_turn(nextup, self).deliver
+      UserMailer.notify_of_turn(nextup, self, self.group).deliver
     end
     UserMailer.notify_of_completion(self.group).deliver if self.group.sentences.count == self.group.submissions_limit
   end

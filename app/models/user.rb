@@ -10,6 +10,16 @@ class User < ActiveRecord::Base
   has_many :groups, through: :user_groups
   has_many :sentences
   has_many :identities, :dependent => :destroy
+  after_create :add_groups_from_join_invitations  
+  
+  def add_groups_from_join_invitations
+    join_group_invitations = JoinGroupEmailInvitation.where(:email_id=>self.email)
+    unless join_group_invitations.nil?
+      join_group_invitations.each do |invitation|
+        user_group = self.user_groups.new(:group_id => invitation.group.id)
+      end
+    end  
+  end
   
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)

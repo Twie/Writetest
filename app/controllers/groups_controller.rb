@@ -1,3 +1,7 @@
+require 'base64'
+require 'cgi'
+require 'openssl'
+
 class GroupsController < ApplicationController
   before_filter :confirm_logged_in
   
@@ -41,17 +45,24 @@ class GroupsController < ApplicationController
     email_ids = extract_emails_from(emails)
     email_ids.each do |email|
       next if current_user.email == email
-      user = User.where(:email=>email)
+      user = User.find_by_email(email)
       if(user.nil?)
-        UserMailer.invite_to_join_group(current_user,group, user).deliver
+        UserMailer.invite_to_join_app(current_user,group, email).deliver
       else
-        UserMailer.invite_to_join_app(current_user, group, email).deliver
+        UserMailer.invite_to_join_group(current_user, group, user).deliver
       end
     end
   end
   
   def demo_facebook_invite
-    
+  end
+  
+  def invite_by_email
+    puts params[:group_id]
+    @group = Group.find(params[:group_id])
+    emails = params[:emails]
+    invite_users_to_join(emails, @group)
+    redirect_to "/sentences/new?gid=#{@group.id}", :notice => "Invitations successfully sent!"
   end
   
   def extract_emails_from( raw_text )

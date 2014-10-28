@@ -1,0 +1,17 @@
+<%- host = ENV["host"]%>
+<p>
+	<%= "Hey #{@user.firstname},"%>
+</p>
+
+<p>
+	<%= "Hey you got kicked out of the #{@group.title} for being in-active. Feel free to re-join the group by clicking the link below. "%>
+	<br>
+	<%= link_to "Rejoin", new_user_group_url+"?gid=#{@group.id}&token=#{@token}"%>
+	<br>
+</p>
+
+<p>
+	- Cheers,
+	<br>
+	YesAndApp
+</p>

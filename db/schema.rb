@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022101457) do
+ActiveRecord::Schema.define(version: 20141027161349) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -69,6 +69,15 @@ ActiveRecord::Schema.define(version: 20141022101457) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
+
+  create_table "join_group_email_invitations", force: true do |t|
+    t.string   "email_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "join_group_email_invitations", ["group_id"], name: "index_join_group_email_invitations_on_group_id"
 
   create_table "sentences", force: true do |t|
     t.string   "content"
