@@ -24,7 +24,7 @@ message: '<%= [current_user.firstname, current_user.lastname].join(" ")%> invite
 			data : {
 			 facekook_group_join_request: {
 			 		group_title: '<%= group.try(:title)%>',
-			 		request_id: response['request_id']
+			 		request_id: response['request']
 			 	}
 			},
 			type : "POST",
