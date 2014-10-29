@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', :registrations => "registrations"}
   resources :sentences
   resources :user_groups , :only => [:new, :create]
+  resources :facekook_group_join_requests, :only => [:create]
   resources :groups, :only => [:new, :create] do 
     member do
       get :result
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
     end
     collection do
       get :demo_facebook_invite
+      get :facebook_invite_callback
+      post :facebook_invite_callback
     end
   end
 
