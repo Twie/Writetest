@@ -6,8 +6,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         if @user.persisted?
           sign_in_and_redirect @user, event: :authentication
           set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
-          puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-          puts session
           if @user and session[:facebook_request_id].present?
             join_request = FacekookGroupJoinRequest.find_by_request_id(session[:facebook_request_id])
             if join_request and join_request.group
