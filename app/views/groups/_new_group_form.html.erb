@@ -1,6 +1,7 @@
-<%- @group = Group.new unless @group.present?%>
+<%- group ||= nil %>
+<%- @group = group || Group.new%>
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
-<%= form_for @group, :html=> {:style => "margin: 2% 20% 2% 20%"} do |f|%>
+<%= form_for @group, :html=> {:style => "margin: 2% 20% 2% 20%", :id => "new_group_creation", :class => 'contact_request_submit'} do |f|%>
   <% if @group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
@@ -41,6 +42,19 @@
   </div>
 <% end %>
 </div>
-<center>
-	<%= render :partial => '/groups/facebook_invite', :locals => {:group => @group}%>
-</center><br/>
+<script>
+	$(".contact_request_submit").submit(function() {
+		var replace_id, valuesToSubmit;
+		replace_id = $(this).attr("id");
+		valuesToSubmit = $(this).serialize();
+		$.ajax({
+			url : $(this).attr("action"),
+			data : valuesToSubmit,
+			type : "POST",
+			success : function(response) {
+				$("#" + replace_id).html(response);
+			}
+		})
+		return false;
+	}); 
+</script>

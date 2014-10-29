@@ -40,9 +40,9 @@ class GroupsController < ApplicationController
       @user_group.save
       emails = params[:emails]
       invite_users_to_join(emails, @group)
-      redirect_to "/sentences/new?gid=#{@group.id}", :notice => "Group successfully created!"
+      render :partial => "group_create_success", :layout => false , :locals =>{:group   => @group}
     else
-      render action: 'new'
+      render :partial => "new_group_form", :layout => false, :locals =>{ :group => @group}
     end
   end
   
