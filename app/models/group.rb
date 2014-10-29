@@ -6,6 +6,11 @@ class Group < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title
   accepts_nested_attributes_for :users
+  before_create :convert_title_to_lower_case
+  
+  def convert_title_to_lower_case
+    self.title.downcase!
+  end
 
   def users_order(current_user = nil)
     created_at_hash = {}

@@ -1,12 +1,14 @@
-<h2>Resend confirmation instructions</h2>
+<%= devise_error_messages! %>
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post ,:class => "ui form segment userform"}) do |f| %>
+  <h2>Resend confirmation mail</h2>	
+  <div class="field">
+  	<div class="ui left labeled icon input">
+  		<%= f.email_field :email, autofocus: true , :placeholder => "Email"%>
+  	</div>
+  </div>
+  
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
-
-  <div><%= f.submit "Resend confirmation instructions" %></div>
-<% end %>
+  <div><%= f.submit "Resend", class: "ui small blue submit button", style: "margin: 5% 0% 3% 0%" %></div>
 
 <%= render "users/shared/links" %>
+<% end %>

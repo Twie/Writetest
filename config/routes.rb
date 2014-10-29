@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', :registrations => "registrations"}
   resources :sentences
   resources :user_groups , :only => [:new, :create]
   resources :groups, :only => [:new, :create] do 
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   root to: 'groups#index'
   get 'admin/chapters' => 'sentences#chapters'
   get 'admin/chapters/download' => 'sentences#chapters_download'
+  get 'user/unconfirmed' => 'users#unconfirmed'
 # The priority is based upon order of creation: first created -> highest priority.
 # See how all your routes lay out with "rake routes".
 

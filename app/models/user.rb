@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :rememberable, :trackable, :validatable, :omniauthable
+         :rememberable, :trackable, :validatable, :omniauthable, :confirmable
   validates_uniqueness_of :username
   validates_presence_of :firstname, :lastname, :username
   has_many :user_groups, :dependent => :destroy
@@ -32,7 +32,8 @@ class User < ActiveRecord::Base
       email = auth.info.email if email_is_verified
       user = User.where(:email => email).first if email
       if user.nil?
-          user = self.generate_user_from_omniauth(auth, email)  
+        user = self.generate_user_from_omniauth(auth, email)
+        user.skip_confirmation!  
         user.save!
       end
     end

@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   end
   
   def confirm_logged_in
+    puts "original url"
+    puts request.original_url
     unless user_signed_in?
         flash[:notice] = "Please log in"
         redirect_to new_user_session_path
