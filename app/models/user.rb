@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :user_groups
   has_many :sentences
   has_many :identities, :dependent => :destroy
-  after_create :add_groups_from_join_invitations  
+  after_create :add_groups_from_join_invitations
   
   def add_groups_from_join_invitations
     join_group_invitations = JoinGroupEmailInvitation.where(:email_id=>self.email)
