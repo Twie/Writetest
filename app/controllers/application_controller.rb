@@ -14,8 +14,7 @@ class ApplicationController < ActionController::Base
   def confirm_logged_in(return_point = request.url)
     unless user_signed_in?
       flash[:notice] = "Please log in"
-      puts "setting return point"
-      set_return_point(return_point)
+      set_return_point(return_point, true)
       redirect_to new_user_session_path
       return false
     else
@@ -23,11 +22,18 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def set_return_point(path)
-    unless session[:return_point].blank?
+  def set_return_point(path, overwrite = false)
+    if overwrite or session[:return_point].blank?
       session[:return_point] = path
     end
-    puts session[:return_point]
+  end
+  
+  def return_point
+    session[:return_point] || root_path
+  end
+  
+  def after_sign_in_path_for(resource)
+      return return_point
   end
   
 end
