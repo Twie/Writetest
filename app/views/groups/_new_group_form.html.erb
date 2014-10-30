@@ -1,5 +1,5 @@
 <%- group ||= nil %>
-<%- @group = group || Group.new%>
+<%- @group = group || Group.new(:submissions_limit => 25)%>
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
 <%= form_for @group, :html=> {:style => "margin: 2% 20% 2% 20%", :id => "new_group_creation", :class => 'contact_request_submit'} do |f|%>
   <% if @group.errors.any? %>
