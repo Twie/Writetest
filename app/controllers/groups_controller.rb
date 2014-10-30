@@ -6,6 +6,8 @@ class GroupsController < ApplicationController
   before_filter :confirm_logged_in, :except => :facebook_invite_callback
   skip_before_filter :verify_authenticity_token, :only => :facebook_invite_callback
   def facebook_invite_callback
+    puts "###################"
+    puts params[:request_ids]
     session[:facebook_request_id] = params[:request_ids]
     redirect_to "/users/auth/facebook_invite"
   end
