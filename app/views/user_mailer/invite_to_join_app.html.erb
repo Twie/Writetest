@@ -4,7 +4,11 @@
 </p>
 
 <p>
-	<%= "#{@group_creator.firstname} invited you to join a new group on YesAndApp! Group Title: #{@group.title} Group Password: #{@group.enter_code}" %>
+	<%= "#{@group_creator.firstname} invited you to join a new group on YesAndApp!"%>
+	<br>
+	<%= "Group Title: #{@group.title}"%>
+	<br>
+	<%= "Group Password: #{@group.enter_code}" %>
 	<br>
 	<%= link_to "Join YesAndApp", root_url %>
 	<%= link_to "Check out your new group.", new_user_group_url+"?gid=#{@group.id}&token=#{@token}"%>
