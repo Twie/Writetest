@@ -9,7 +9,7 @@ class Group < ActiveRecord::Base
   before_create :convert_title_to_lower_case
   
   def convert_title_to_lower_case
-    self.title.downcase!
+    self.title = self.title.downcase
   end
 
   def users_order(current_user = nil)
