@@ -1,5 +1,5 @@
 <%- group ||= nil %>
-<%- @group = group || Group.new%>
+<%- @group = group || Group.new(:submissions_limit => 25)%>
 <div class="ui raised segment", style= "margin: 2% 20% 2% 20%">
 <%= form_for @group, :html=> {:style => "margin: 2% 20% 2% 20%", :id => "new_group_creation", :class => 'contact_request_submit'} do |f|%>
   <% if @group.errors.any? %>
@@ -16,7 +16,7 @@
   <div class="form-group">
 	<%= f.label "Group Title"%>
   <div class="field">
-    <%= f.text_field :title, :placeholder => 'New YesAndApp Group', :style=>"text-transform: lowercase;" %>
+    <%= f.text_field :title, :placeholder => 'New Group Title', :style=>"text-transform: lowercase;" %>
   </div>
   </div>
   <div class="form-group">

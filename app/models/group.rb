@@ -6,10 +6,11 @@ class Group < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title
   accepts_nested_attributes_for :users
-  before_create :convert_title_to_lower_case
+  before_create :convert_title_to_lower_case_and_add_default
   
-  def convert_title_to_lower_case
+  def convert_title_to_lower_case_and_add_default
     self.title = self.title.downcase
+    self.submissions_limit = 25 if self.submissions_limit.blank? 
   end
 
   def users_order(current_user = nil)
