@@ -60,12 +60,12 @@ class Group < ActiveRecord::Base
             last_sentence_played_in_group = Sentence.where(:group_id => self.id).last
             if(user_group.skipped_count == 1 and self.users.count > 1)
               UserMailer.notify_of_skip_chance(first_user,self).deliver
-              UserMailer.notify_of_turn(created_at_hash[0],last_sentence_played_in_group, self)
+              UserMailer.notify_of_turn(created_at_hash[0],last_sentence_played_in_group, self).deliver
             end
             if(user_group.skipped_count >= 2 and self.users.count > 1)
               UserGroup.destroy(user_group.id)
               UserMailer.notify_of_group_eviction(first_user,self).deliver
-              UserMailer.notify_of_turn(created_at_hash[0],last_sentence_played_in_group, self)
+              UserMailer.notify_of_turn(created_at_hash[0],last_sentence_played_in_group, self).deliver
             else
               user_group.save
             end
